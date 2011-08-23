@@ -1,30 +1,18 @@
-# Look in the tasks/setup.rb file for the various options that can be
-# configured in this Rakefile. The .rake files in the tasks directory
-# are where the options are used.
 
 begin
   require 'bones'
-  Bones.setup
 rescue LoadError
-  begin
-    load 'tasks/setup.rb'
-  rescue LoadError
-    raise RuntimeError, '### please install the "bones" gem ###'
-  end
+  abort '### Please install the "bones" gem ###'
 end
 
-ensure_in_path 'lib'
-require 'dialog-fu'
+task :default => 'test:run'
+task 'gem:release' => 'test:run'
 
-task :default => 'spec:run'
+Bones {
+  name         'dialog_fu'
+  authors      'Chris Riddoch'
+  email        'riddochc@gmail.com'
+  readme_file  'README.asciidoc'
+  url          'https://github.com/riddochc/dialog-fu'
+}
 
-PROJ.name = 'dialog-fu'
-PROJ.authors = 'FIXME (who is writing this software)'
-PROJ.email = 'FIXME (your e-mail)'
-PROJ.url = 'FIXME (project homepage)'
-PROJ.version = DialogFu::VERSION
-PROJ.rubyforge.name = 'dialog-fu'
-
-PROJ.spec.opts << '--color'
-
-# EOF

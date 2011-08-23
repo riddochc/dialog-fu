@@ -2,23 +2,26 @@
 module DialogFu
 
   # :stopdoc:
-  VERSION = '1.0.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
+  VERSION = ::File.read(PATH + 'version.txt').strip
   # :startdoc:
-
-  # Returns the version string for the library.
-  #
-  def self.version
-    VERSION
-  end
 
   # Returns the library path for the module. If any arguments are given,
   # they will be joined to the end of the libray path using
   # <tt>File.join</tt>.
   #
   def self.libpath( *args )
-    args.empty? ? LIBPATH : ::File.join(LIBPATH, args.flatten)
+    rv =  args.empty? ? LIBPATH : ::File.join(LIBPATH, args.flatten)
+    if block_given?
+      begin
+        $LOAD_PATH.unshift LIBPATH
+        rv = yield
+      ensure
+        $LOAD_PATH.shift
+      end
+    end
+    return rv
   end
 
   # Returns the lpath for the module. If any arguments are given,
@@ -26,7 +29,16 @@ module DialogFu
   # <tt>File.join</tt>.
   #
   def self.path( *args )
-    args.empty? ? PATH : ::File.join(PATH, args.flatten)
+    rv = args.empty? ? PATH : ::File.join(PATH, args.flatten)
+    if block_given?
+      begin
+        $LOAD_PATH.unshift PATH
+        rv = yield
+      ensure
+        $LOAD_PATH.shift
+      end
+    end
+    return rv
   end
 
   # Utility method used to require all files ending in .rb that lie in the
@@ -46,4 +58,3 @@ end  # module DialogFu
 
 DialogFu.require_all_libs_relative_to(__FILE__)
 
-# EOF
