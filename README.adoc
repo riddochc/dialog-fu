@@ -1,0 +1,41 @@
+= Dialog-fu
+Chris Riddoch <riddochc@gmail.com>
+Version 0.2, 2014-06-27
+
+== Description
+
+This library provides a high-level API for simple user interfaces with
+kdialog (forthcoming: dialog/zenity/yad/cocoadialog)
+
+Sometimes, being usable matters.  In addition to providing the world's most
+intricate command suite and option parsing for expert users, it might be nice
+to just give a little interface.  Not so much that you have to restructure
+your whole program around some GUI framework, but if you need a filename
+or a little text entry box or a confirmation box, the "dialog"-like programs
+can make the job a lot easier.
+
+This is intended to make it easy for you, as a programmer, to make your
+programs easier to use.  Everyone wins, right?
+
+Further documentation can be generated with by running 'rake'
+
+== Requirements
+
+Ruby 2.0 or newer
+
+One of:
+
+* kdialog
+
+In the future, other variations of the 'dialog' program will be supported.
+
+== Installation
+
+  gem install dialog-fu 
+
+== License
+
+Copyright © 2011-14 Chris Riddoch
+
+See lgpl-3.0.txt for license details
+

@@ -1,13 +1,11 @@
-#!/usr/bin/env ruby
-
-require 'rubygems'
-require 'escape'
 require 'date'
+require 'open3'
+require 'shellwords'
 require 'tempfile'
 
 def run_cmd(cmdline)
   user_input = ""
-  IO.popen(cmdline) do |pipe|
+  Open3.popen3(cmdline) do |pipe|
     user_input = pipe.read(nil)
   end
   retval = $?.to_i
@@ -16,20 +14,16 @@ def run_cmd(cmdline)
 end
 
 def shell_option(options_hash, symbol)
-  unless options_hash[symbol].nil?
-    value = options_hash[symbol]
-    if block_given?
-      retval = yield symbol, value
-      if (retval.is_a?(Array) and retval.length == 2)
-        "--#{retval[0].to_s}=#{Escape.shell_single_word(retval[1].to_s)} "
-      else
-        retval
-      end
+  value = options_hash.fetch(symbol, "")
+  if block_given?
+    retval = yield symbol, value
+    if (retval.is_a?(Array) and retval.length == 2)
+      "--#{retval[0].to_s}=#{Shellwords.escape(retval[1].to_s)} "
     else
-      "--#{symbol.to_s}=#{Escape.shell_single_word(value.to_s)} "
+      retval
     end
   else
-    ""
+    "--#{symbol.to_s}=#{Escape.shell_single_word(value.to_s)} "
   end
 end
 
