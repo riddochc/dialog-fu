@@ -233,11 +233,13 @@ module Dialog::KDialog
     end
   end
 
-  # @todo Implement
-  # passivepopup - text, timeout
-  # In this case, kdedialog immediately returns, which is good, so I don't have to background it...
+  # Raise a notification for the user. This doesn't bring up a window that takes focus,
+  # just a little box (usually above the taskbar) in the notification area that goes away by itself.
   #
-  def notification()
+  # @param text [String] The text to show in the notification
+  # @param timeout [Integer] The number of seconds to show the notification for
+  def notification(text, timeout: 3)
+    run(["--passivepopup", text, timeout.to_s])
   end
 
   # @todo Implement
