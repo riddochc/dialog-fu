@@ -1,5 +1,7 @@
 = Dialog-fu
 Chris Riddoch <riddochc@gmail.com>
+:language: ruby
+
 Version 0.2, 2014-06-27
 
 == Description

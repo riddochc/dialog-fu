@@ -1,2 +1,3 @@
--o rdoc
---title "Dialog-fu 0.2 Documentation
+-o doc
+--title "Dialog-fu 0.2 Documentation"
+-m asciidoc
