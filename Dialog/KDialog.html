@@ -174,6 +174,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#filepicker-instance_method" title="#filepicker (instance method)">- (Array&lt;String&gt; String) <strong>filepicker</strong>(action: :save, type: :file, dir: ENV[&#39;HOME&#39;], multiple: false, filter: nil) {|path| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><div class="paragraph">
+<p>Present a file-picker box, for getting filenames or URLs from the user, for saving or opening.</p>
+</div></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#icon-instance_method" title="#icon (instance method)">- (Object) <strong>icon</strong> </a>
     
 
@@ -246,7 +270,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#notification-instance_method" title="#notification (instance method)">- (Object) <strong>notification</strong> </a>
+      <a href="#notification-instance_method" title="#notification (instance method)">- (Object) <strong>notification</strong>(text, timeout: 3) </a>
     
 
     
@@ -261,31 +285,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>passivepopup - text, timeout In this case, kdedialog immediately returns, which is good, so I don&#8217;t have to background it&#8230;</p>
-</div></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#open_file-instance_method" title="#open_file (instance method)">- (Object) <strong>open_file</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>getopenurl, open_file options:  - multiple, allowing several to be selected.</p>
+<p>Raise a notification for the user.</p>
 </div></div></span>
   
 </li>
@@ -340,7 +340,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#run-instance_method" title="#run (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>run</strong>(arglist) {|The| ... }</a>
+      <a href="#run-instance_method" title="#run (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>run</strong>(arglist) {|output| ... }</a>
     
 
     
@@ -864,6 +864,245 @@ block is called.  If not, the block is ignored.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="filepicker-instance_method">
+  
+    - (<tt>Array&lt;String&gt; String</tt>) <strong>filepicker</strong>(action: :save, type: :file, dir: ENV[&#39;HOME&#39;], multiple: false, filter: nil) {|path| ... }
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'><div class="paragraph">
+<p>Figure out what kinds of strings are expected of the filter parameter, write code to validate</p>
+</div></div>
+  </div>
+
+<div class="paragraph">
+<p>Present a file-picker box, for getting filenames or URLs from the user, for saving or opening.</p>
+</div>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>action</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>One of :save or :open</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>One of :url, :file, or :directory, indicating what kind of input is expected from the user</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dir</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>Directory to start the UI in, defaults to ENV[<em>HOME</em>]</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>multiple</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>If true, allow the user to select multiple files. Only works when action is :open.</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>A description of what types of files should be displayed in directory listings</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt; String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>The path (or paths) selected by the user</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt; String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>The path (or paths) selected by the user</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 255</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_filepicker'>filepicker</span><span class='lparen'>(</span><span class='label'>action:</span> <span class='symbol'>:save</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:file</span><span class='comma'>,</span> <span class='label'>dir:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HOME</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>multiple:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--separate-output</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--multiple</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_multiple'>multiple</span> <span class='kw'>and</span> <span class='id identifier rubyid_action'>action</span> <span class='op'>==</span> <span class='symbol'>:open</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='kw'>case</span> <span class='lbracket'>[</span><span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span>
+  <span class='kw'>when</span> <span class='lbracket'>[</span><span class='symbol'>:save</span><span class='comma'>,</span> <span class='symbol'>:file</span><span class='rbracket'>]</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--getsavefilename</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>when</span> <span class='lbracket'>[</span><span class='symbol'>:save</span><span class='comma'>,</span> <span class='symbol'>:url</span><span class='rbracket'>]</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--getsaveurl</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>when</span> <span class='lbracket'>[</span><span class='symbol'>:open</span><span class='comma'>,</span> <span class='symbol'>:file</span><span class='rbracket'>]</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--getopenfilename</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>when</span> <span class='lbracket'>[</span><span class='symbol'>:open</span><span class='comma'>,</span> <span class='symbol'>:url</span><span class='rbracket'>]</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--getopenurl</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='symbol'>:directory</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--getexistingdirectory</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dir'>dir</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_filter'>filter</span> <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span> <span class='op'>==</span> <span class='symbol'>:directory</span> <span class='kw'>or</span> <span class='id identifier rubyid_filter'>filter</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_input'>input</span><span class='op'>|</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_multiple'>multiple</span>
+        <span class='id identifier rubyid_param'>param</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\n</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_param'>param</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span>
+      <span class='kw'>end</span>
+      <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_param'>param</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_input'>input</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_multiple'>multiple</span>
+      <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\n</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_input'>input</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="icon-instance_method">
   
     - (<tt>Object</tt>) <strong>icon</strong> 
@@ -907,11 +1146,11 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-255
-256</pre>
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_icon'>icon</span><span class='lparen'>(</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -1215,7 +1454,7 @@ Contrasting with the standard dialog boxes, the button presented to the user
       <div class="method_details ">
   <h3 class="signature " id="notification-instance_method">
   
-    - (<tt>Object</tt>) <strong>notification</strong> 
+    - (<tt>Object</tt>) <strong>notification</strong>(text, timeout: 3) 
   
 
   
@@ -1223,23 +1462,51 @@ Contrasting with the standard dialog boxes, the button presented to the user
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-  <div class="note todo">
-    <strong>TODO:</strong>
-    <div class='inline'><div class="paragraph">
-<p>Implement</p>
-</div></div>
-  </div>
-
-<div class="paragraph">
-<p>passivepopup - text, timeout
-In this case, kdedialog immediately returns, which is good, so I don&#8217;t have to background it&#8230;</p>
+    <div class="paragraph">
+<p>Raise a notification for the user. This doesn&#8217;t bring up a window that takes focus,
+just a little box (usually above the taskbar) in the notification area that goes away by itself.</p>
 </div>
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>The text to show in the notification</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>The number of seconds to show the notification for</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -1247,62 +1514,15 @@ In this case, kdedialog immediately returns, which is good, so I don&#8217;t hav
       <pre class="lines">
 
 
-240
-241</pre>
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 240</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 241</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_notification'>notification</span><span class='lparen'>(</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="open_file-instance_method">
-  
-    - (<tt>Object</tt>) <strong>open_file</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-  <div class="note todo">
-    <strong>TODO:</strong>
-    <div class='inline'><div class="paragraph">
-<p>Implement</p>
-</div></div>
-  </div>
-
-<div class="paragraph">
-<p>getopenurl, open_file
-options:
- - multiple, allowing several to be selected.</p>
-</div>
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-247
-248</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 247</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_open_file'>open_file</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_notification'>notification</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='int'>3</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--passivepopup</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1341,32 +1561,32 @@ options:
       <pre class="lines">
 
 
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281</pre>
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progressbar'>progressbar</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dbus</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='const'>DBus</span>
@@ -1525,7 +1745,7 @@ tested, and if true, is selected.</p>
       <div class="method_details ">
   <h3 class="signature " id="run-instance_method">
   
-    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>run</strong>(arglist) {|The| ... }
+    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>run</strong>(arglist) {|output| ... }
   
 
   
@@ -1570,7 +1790,7 @@ tested, and if true, is selected.</p>
   
     <li>
       
-        <span class='name'>The</span>
+        <span class='name'>output</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -1579,7 +1799,7 @@ tested, and if true, is selected.</p>
       
         &mdash;
         <div class='inline'><div class="paragraph">
-<p>output of running kdialog</p>
+<p>The output of running kdialog</p>
 </div></div>
       
     </li>
@@ -1628,22 +1848,22 @@ tested, and if true, is selected.</p>
       <pre class="lines">
 
 
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300</pre>
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 288</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 331</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_arglist'>arglist</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>kdialog</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_arglist'>arglist</span>
@@ -2010,7 +2230,7 @@ horizontal and vertical scrollbars.  For small amounts of text, use #messagebox<
 </div>
 
     <div id="footer">
-  Generated on Sun Jul  6 00:11:02 2014 by
+  Generated on Sun Jul  6 16:22:51 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>
