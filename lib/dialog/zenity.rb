@@ -1,0 +1,2 @@
+module Dialog::Zenity
+end

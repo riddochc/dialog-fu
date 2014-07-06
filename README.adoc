@@ -35,6 +35,16 @@ In the future, other variations of the 'dialog' program will be supported.
 
   gem install dialog-fu 
 
+== Use
+
+----
+require 'dialog-fu'
+
+Dialog.autosetup  # Figure out what implementation to use
+
+Dialog.messagebox("Hello, world")
+----
+
 == License
 
 Copyright © 2011-14 Chris Riddoch

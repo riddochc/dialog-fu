@@ -1,0 +1,2 @@
+module Dialog::Yad
+end

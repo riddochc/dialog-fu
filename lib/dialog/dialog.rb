@@ -1,0 +1,2 @@
+module Dialog::Dialog
+end
