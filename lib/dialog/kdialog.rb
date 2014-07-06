@@ -242,11 +242,52 @@ module Dialog::KDialog
     run(["--passivepopup", text, timeout.to_s])
   end
 
-  # @todo Implement
-  # getopenurl, open_file
-  # options:
-  #  - multiple, allowing several to be selected.
-  def open_file()
+  # Present a file-picker box, for getting filenames or URLs from the user, for saving or opening.
+  # 
+  # @param action [Symbol] One of :save or :open
+  # @param type [Symbol] One of :url, :file, or :directory, indicating what kind of input is expected from the user
+  # @param dir [String] Directory to start the UI in, defaults to ENV['HOME']
+  # @param multiple [Boolean] If true, allow the user to select multiple files. Only works when action is :open.
+  # @param filter [String] A description of what types of files should be displayed in directory listings
+  # @yieldparam path [Array<String> String] The path (or paths) selected by the user
+  # @return [Array<String> String] The path (or paths) selected by the user
+  # @todo Figure out what kinds of strings are expected of the filter parameter, write code to validate
+  def filepicker(action: :save, type: :file, dir: ENV['HOME'], multiple: false, filter: nil, &blk)
+    cmd = ["--separate-output"]
+    cmd << "--multiple" if (multiple and action == :open)
+    cmd << case [action, type]
+    when [:save, :file]
+      "--getsavefilename"
+    when [:save, :url]
+      "--getsaveurl"
+    when [:open, :file]
+      "--getopenfilename"
+    when [:open, :url]
+      "--getopenurl"
+    else
+      if type == :directory
+        "--getexistingdirectory"
+      end
+    end
+    cmd << dir
+    cmd << filter unless (type == :directory or filter.nil?)
+    if block_given?
+      run(cmd) do |input|
+        if multiple
+          param = input.split(/\n/)
+        else
+          param = input
+        end
+        yield(param)
+      end
+    else
+      input, status = run(cmd)
+      if multiple
+        input.split(/\n/)
+      else
+        input
+      end
+    end
   end
 
   # @todo Implement
