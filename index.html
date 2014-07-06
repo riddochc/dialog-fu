@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Dialog-fu 0.2 Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Version 0.2, 2014-06-27</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">Description</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This library provides a high-level API for simple user interfaces with
+kdialog (forthcoming: dialog/zenity/yad/cocoadialog)</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, being usable matters.  In addition to providing the world&#8217;s most
+intricate command suite and option parsing for expert users, it might be nice
+to just give a little interface.  Not so much that you have to restructure
+your whole program around some GUI framework, but if you need a filename
+or a little text entry box or a confirmation box, the "dialog"-like programs
+can make the job a lot easier.</p>
+</div>
+<div class="paragraph">
+<p>This is intended to make it easy for you, as a programmer, to make your
+programs easier to use.  Everyone wins, right?</p>
+</div>
+<div class="paragraph">
+<p>Further documentation can be generated with by running <em>rake</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements">Requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ruby 2.0 or newer</p>
+</div>
+<div class="paragraph">
+<p>One of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>kdialog</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the future, other variations of the <em>dialog</em> program will be supported.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_dialog'>dialog</span><span class='op'>-</span><span class='id identifier rubyid_fu'>fu</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use">Use</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>dialog-fu</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='const'>Dialog</span><span class='period'>.</span><span class='id identifier rubyid_autosetup'>autosetup</span>  <span class='comment'># Figure out what implementation to use
+</span>
+<span class='const'>Dialog</span><span class='period'>.</span><span class='id identifier rubyid_messagebox'>messagebox</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello, world</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright © 2011-14 Chris Riddoch</p>
+</div>
+<div class="paragraph">
+<p>See lgpl-3.0.txt for license details</p>
+</div>
+</div>
+</div></div></div>
+
+    <div id="footer">
+  Generated on Sun Jul  6 00:11:02 2014 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.4 (ruby-2.1.2).
+</div>
+
+  </body>
+</html>
