@@ -283,7 +283,7 @@ module Dialog::KDialog
   # @api private
   # @param arglist [Array<String>] List of command-line arguments for kdialog
   # @raise [StandardError] Any exception raised by Open3#capture2
-  # @yieldparam [String] The output of running kdialog
+  # @yieldparam output [String] The output of running kdialog
   # @macro runreturn
   def run(arglist, &blk)
     cmd = ["kdialog"] + arglist
