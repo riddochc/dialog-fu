@@ -2,6 +2,7 @@ require 'yard'
 require 'rake/testtask'
 require_relative './lib/dialog.rb'
 
+task :doc => :yard
 YARD::Rake::YardocTask.new do |t|
   t.files   = ['lib/**/*.rb']
 end
