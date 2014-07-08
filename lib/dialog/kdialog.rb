@@ -300,6 +300,19 @@ module Dialog::KDialog
     run(["--geticon", "--help"])
   end
 
+  # Color Picker
+  #
+  # @return [Array<Integer> nil] An array of [red, green, blue] 8-bit color components, or nil if 'cancel' pressed.
+  def color()
+    c = nil
+    run(["--getcolor"]) {|out|
+      c = [out[1,2].to_i(16),
+       out[3,2].to_i(16),
+       out[5,2].to_i(16)]
+    }
+    c
+  end
+
   # @todo Design and implement API for using progressbar
   def progressbar()
     require 'dbus' unless DBus
