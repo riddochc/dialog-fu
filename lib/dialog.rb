@@ -1,5 +1,5 @@
 module Dialog
-  VERSION='0.2'
+  VERSION='0.2.1'
 end
 
 require_relative "dialog/dialog"
