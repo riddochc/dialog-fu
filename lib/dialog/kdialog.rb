@@ -291,12 +291,13 @@ module Dialog::KDialog
     end
   end
 
-  # @todo Implement
-  # Known groups for iconloader (on my system, anyway):
+  # Icon Picker
   #
-  # * Desktop, Toolbar, MainToolbar, Small, Panel, Dialog, User, Action, Application, Device, FileSystem, MimeType, Animation, Category, Emblem, Emote, International, Place, StatusIcon
-  # * From KDE3: Devices, MimeTypes, Applications, Actions
+  # Allows the user to choose an icon among those available to KDE.
+  #
+  # @macro runreturn
   def icon()
+    run(["--geticon", "--help"])
   end
 
   # @todo Design and implement API for using progressbar
