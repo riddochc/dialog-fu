@@ -192,6 +192,8 @@ module Dialog::KDialog
     selection(choices, label: label, type: :radio, default: default)
   end
 
+  # Implementation of radiobuttons and checkboxes; user selections.
+  #
   # @macro choiceparam
   # @macro labelparam
   # @macro defaultparam
@@ -199,7 +201,6 @@ module Dialog::KDialog
   #   radio buttons, only one selection)
   # @raise UnknownSelectionType If type is something other than :check or :radio
   # @macro runreturn
-  #
   # @note If +type+ is +:radio+, it's the caller's responsibility to either specify a default,
   #   or make sure only one of the 'choices' attributes is true in the +choices+ parameter.
   def selection(choices, label: "", type: :check, default: nil)
