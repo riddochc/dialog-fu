@@ -15,7 +15,26 @@ Dialog.autosetup  # Figure out what implementation to use
 #textbox("Something to read...")
 #file = Dialog.filepicker(action: :open, multiple: true)
 #puts "You chose: #{file.inspect}"
-Dialog.notification("Hello, world.")
+#Dialog.notification("Hello, world.")
+#puts Dialog.color().inspect
+
+Dialog.progressbar(steps: 10) {|pb|
+  binding.pry
+}
+#  0.upto(25) {|i|
+#    n = i*4
+#    pb.set(n)
+#    if n.between?(0,25)
+#      pb.label("Getting started")
+#    elsif n.between?(25,75)
+#      pb.label("In the middle of working...")
+#    elsif n.between?(75,99)
+#      pb.label("Finishing up...")
+#    end
+#    sleep 0.5
+#  }
+#}
+#puts "Done!"
 
 #colorchoice = Struct.new(:blue, :green, :red, :black)
 #opts = colorchoice.new(false, false, true, false)

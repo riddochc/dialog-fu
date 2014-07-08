@@ -1,5 +1,6 @@
 require 'open3'
 require 'tempfile'
+require 'dbus'
 
 module Dialog::KDialog
 
@@ -313,29 +314,116 @@ module Dialog::KDialog
     c
   end
 
-  # @todo Design and implement API for using progressbar
-  def progressbar()
-    require 'dbus' unless DBus
-    steps = 10
-    out, status = Open3.capture2("kdialog", "--progressbar", "Titlebar Text", steps.to_s)
+  # Wraps the ruby-dbus interface to connect to and control a KDE ProgressDialog object.
+  # An instance of this object is easily created by the {Dialog::KDialog#progressbar} method, don't try to create it yourself.
+  class ProgressBar
+    # @param servicename [String] The dbus service to connect to, provided by kdialog's output
+    # @param path [String] The path to the progress bar, provided by kdialog's output
+    # @!macro [new] pgargs
+    #   @param show_cancel [Boolean] If true, display a cancel button for the user to request early stop of work
+    #   @param label [String] Text to display above the progress bar, typically providing information about current activity
+    #   @param autoclose [Boolean] If true, the window will close when the progress is set to the highest value
+    #   @yieldparam bar [ProgressBar] An object for manipulating state of the progress bar, ensures proper closing at block exit
+    def initialize(servicename, path, show_cancel: false, label: "Working...", autoclose: true)
+      bus = DBus::SessionBus.instance
+      service = bus.service(servicename)
+      dbusobj =  service.object(path)
+      dbusobj.introspect
+      @progress = dbusobj["org.kde.kdialog.ProgressDialog"]
+      #@progress["maximum"] = max
+      @progress["autoClose"] = autoclose
+      @progress.setLabelText(label)
+      if block_given?
+        begin
+          yield(self)
+        ensure
+          self.close()
+        end
+      end
+      self
+    end
+
+    # If the option to show a cancel button is available, has it been pressed?
+    # @return [Boolean]
+    def canceled?
+      @progress.wasCancelled.first
+    end
+    alias cancelled? canceled?
+
+    # Get the current value of the progress bar
+    # @return [Integer]
+    def value()
+      @progress["value"].to_i
+    end
+
+    # Set the current value of the progress bar. The percentage shown is (n / max)
+    # Values outside the range of 0..max will be ignored.
+    #
+    # @param n [Integer] Number to set it to
+    # @return [ProgressBar] self, for method chaining
+    def value=(n)
+      @progress["value"] = n
+      self
+    end
+
+    # Increments the progress bar by one step
+    # @return [ProgressBar] self, for method chaining
+    def succ
+      begin
+        @progress["value"] += 1
+      rescue DBus::Error
+        # This could happen...
+      end
+      self
+    end
+
+    # @return [Integer] The maximum value the progress bar go up to.
+    def max()
+      @progress["maximum"]
+    end
+
+    # Sets the maximum value the progress bar can go up to
+    # 
+    # @param n [Integer] Number to set it to
+    # @return [ProgressBar] self, for method chaining
+    def max=(n)
+      @progress["maximum"] = n
+      self
+    end
+
+    # Change the text of the label above the progress bar
+    # @param text [String] New text for label
+    # @return [ProgressBar] self, for method chaining
+    def label(text)
+      @progress.setLabelText(text)
+      self
+    end
+
+    # Close the progress bar
+    # @return [Boolean] true
+    def close()
+      begin
+        @progress.close
+      rescue DBus::Error
+        # Already closed, no worries.
+      end
+      true
+    end
+  end
+
+  # Present a progress bar to the user; returns an object to control its desplay
+  #
+  # @param steps [Integer] Number of increments in the progress bar.
+  # @param title [String] Text to display in the titlebar of the window
+  # @macro pbargs
+  # @return [ProgressBar] An object for manipulating state of the progress bar 
+  def progressbar(steps: 100, title: "Progress Bar", show_cancel: false, label: "Working...", autoclose: true, &blk)
+    out, status = Open3.capture2("kdialog", "--progressbar", title, steps.to_s)
     if status != 0
       raise "kdialog exited unexpectedly"
     end
     servicename, path = *out.split(/\s+/)
-
-    bus = DBus::SessionBus.instance
-    dialogservice = bus.service(servicename)
-    dialogobj =  dialogservice.object(path)
-    d = dialogobj["org.kde.kdialog.ProgressDialog"]
-
-    d.showCancelButton(true) # or false...
-    r = d.wasCancelled
-    r.first # the boolean.  Why it's in an array? Dunno.
-    d["maximum"] # => 10
-    d["autoClose"] # => false, by default
-    d.setLabelText("Test")
-    d["value"] # Can be assigned! Yay!  Ignored if out of range.
-    d.close # When done!
+    ProgressBar.new(servicename, path, label: label, autoclose: autoclose, &blk)
   end
 
   # @api private
