@@ -140,96 +140,149 @@ module Dialog::KDialog
   # @!macro [new] labelparam
   #   @param label [String] The text to display above input fields
   # @!macro [new] choiceparam
-  #   @param choices [#members] An object with an attribute for each choice, and a +#members+ method which
-  #     returns a list of those attributes to be used.
+  #   @param choices [#members #default] An object of a class with the following characteristics:
+  #     * A +#members+ method which returns a list of the choices available (as an array of symbols)
+  #     * A +#default+ method which returns a symbol naming the attribute or method which will be preselected for the user
+  #     * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+  #     * Optionally, a +#text_of+ method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol
+  # @!macro [new] selectionblock
+  #  @yieldparam selection [Symbol] If a block is provided, it will be called with the selection, *instead of* the associated method on the choices object.
 
   # Present a dropdown box, calls the selected method on the choices object.
   #
-  # This is similar to a radio button selection; only one selection can be made.
+  # Similar to a radio button selection; only one selection can be made.
   #
   # @macro choiceparam
   # @macro labelparam
-  #
-  def combobox(choices, label: "")
-    cmd = ["--combobox", label] + choices.members.map {|k| k.to_s}
+  # @macro selectionblock
+  # @macro runreturn
+  def dropdown(choices, label: "Select one below")
+    cmd = ["--combobox", label]
+  
+    choices_to_text = Hash[choices.members.map {|m|
+      if choices.respond_to?(:text_of)
+        [m, choices.text_of(m)]
+      else
+        [m, m.to_s]
+      end
+    }]
+    text_to_choices = choices_to_text.invert
+
+    if choices.respond_to?(:default) && !(choices.default.nil?)
+      cmd += ["--default", choices_to_text[choices.default]]
+    end
+
+    cmd += choices.members.map {|k| choices_to_text[k] }
+
     run(cmd) {|sel|
-      selected = (sel + '=').to_sym
-      (choices.members - [selected]).each {|c| choices.send((c.to_s + '=').to_sym, false)}
-      choices.send(selected, true)
+      selected = text_to_choices[sel]
+      if block_given?
+        yield(selected)
+      elsif choices.respond_to?(selected)
+        choices.send(selected)
+      end
     }
   end
 
   # Present a set of checkboxes to the user, calls the selected method on the choices object.
   #
-  # Using this method may be easier than using #selection, as you don't need to indicate you want checkboxes.
+  # When more than one item is selected, the methods will be executed in the order they occur in choices#members
   #
   # @macro choiceparam
   # @macro labelparam
-  # @!macro [new] defaultparam
-  #   @param default [Array<String> String] The name of the attribute to be pre-selected for the user,
-  #     or a list of such names, in the case of checkboxes.  If not provided, the attribute's value is
-  #     tested, and if true, is selected.
-  # @example Using a Struct for checkboxes
-  #   Foodselection = Struct.new(:salad, :soup, :sandwich, :cookie, :drink)
-  #   choices = Foodselection.new(false, false, true, false, true)  # sandwich and drink preselected
-  #   checkboxes(choices, label: "What would you like for lunch?")
+  # @macro selectionblock
   # @macro runreturn
   #
-  def checkboxes(choices, label: "", default: nil)
-    selection(choices, label: label, type: :check, default: default)
+  # @example Using the checkboxes API
+  #    class FoodShop
+  #      attr_reader :members, :default
+  #
+  #      def initialize(default)
+  #        @members = [:sandwich, :soup, :salad]
+  #        @default = default
+  #      end
+  #
+  #      def text_of(s)
+  #        {sandwich: "Sandwich", soup: "Soup of the day", salad: "Garden Salad"}[s]
+  #      end
+  #
+  #      def sandwich()
+  #        puts "Making a sandwich"
+  #      end
+  #
+  #      def soup()
+  #        soups = %w{Tomato Cheese Tortilla}
+  #        puts "Making a bowl of #{soups.sample}"
+  #      end
+  #
+  #      def salad()
+  #        puts "Making a salad"
+  #      end
+  #    end
+  #
+  #    fs = FoodShop.new(:normal)
+  #    Dialog.checkboxes(fs, label: "What'll it be?")
+  #
+  def checkboxes(choices, label: "")
+    selection(choices, label: label, type: :check)
   end
 
   # Present a set of radio buttons to the user, calls the selected method on the choices object.
   #
-  # Using this method may be easier than using #selection, as you don't need to indicate you want radio buttons.
-  # 
   # @macro choiceparam
   # @macro labelparam
-  # @macro defaultparam
   # @macro runreturn
-  # @note It's the caller's responsibility to either specify a default,
-  #   or make sure only one of the 'choices' attributes is true in the +choices+ parameter.
-  def radiobuttons(choices, label: "", default: nil)
-    selection(choices, label: label, type: :radio, default: default)
+  def radiobuttons(choices, label: "")
+    selection(choices, label: label, type: :radio)
   end
 
-  # Implementation of radiobuttons and checkboxes; user selections.
+  # Implementation of radiobuttons and checkboxes.
   #
   # @macro choiceparam
   # @macro labelparam
-  # @macro defaultparam
   # @param type [Symbol] Either :check (for checkboxes, multiple selections allowed) or :radio, (for
   #   radio buttons, only one selection)
   # @raise UnknownSelectionType If type is something other than :check or :radio
   # @macro runreturn
-  # @note If +type+ is +:radio+, it's the caller's responsibility to either specify a default,
-  #   or make sure only one of the 'choices' attributes is true in the +choices+ parameter.
-  def selection(choices, label: "", type: :check, default: nil)
+  # @api private
+  def selection(choices, label: "", type: :check)
     cmd = ["--separate-output"]
     cmd << case type
     when :check
       "--checklist"
     when :radio
       "--radiolist"
+    when :dropdown
+
     else
       raise UnknownSelectionType, "Unknown selection type", caller
     end
     cmd << label
+    default = if choices.respond_to?(:default) && !(choices.default.nil?)
+                choices.default
+              else
+                nil
+              end
     choices.members.each_with_index {|c, i|
-      if ((default.nil? and choices.send(c)) or (default == c) or (default.include?(c)))
-          cmd += [i.to_s, c.to_s, 'on']
+      if choices.respond_to?(:text_of)
+        text = choices.text_of(c) || c.to_s
       else
-        cmd += [i.to_s, c.to_s, 'off']
+        text = c.to_s
+      end
+      if c == default
+        cmd += [i.to_s, text, 'on']
+      else
+        cmd += [i.to_s, text, 'off']
       end
     }
     run(cmd) do |sel|
       selected = sel.each_line.map{|l| l.chomp.to_i}
-      choices.members.each.with_index do |box, i|
-        method = (box.to_s + '=').to_sym
-        if selected.include?(i)
-          choices.send(method, true)
-        else
-          choices.send(method, false)
+      choices.members.values_at(*selected).each do |m|
+        method = m.to_sym
+        if block_given?
+          yield(m)
+        elsif choices.respond_to?(m)
+          choices.send(m)
         end
       end
     end

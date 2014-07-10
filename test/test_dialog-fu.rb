@@ -18,9 +18,9 @@ Dialog.autosetup  # Figure out what implementation to use
 #Dialog.notification("Hello, world.")
 #puts Dialog.color().inspect
 
-Dialog.progressbar(steps: 10) {|pb|
-  binding.pry
-}
+#Dialog.progressbar(steps: 10) {|pb|
+#  binding.pry
+#}
 #  0.upto(25) {|i|
 #    n = i*4
 #    pb.set(n)
@@ -39,4 +39,34 @@ Dialog.progressbar(steps: 10) {|pb|
 #colorchoice = Struct.new(:blue, :green, :red, :black)
 #opts = colorchoice.new(false, false, true, false)
 #radiobuttons(opts, label: "Choose a color", default: :blue)
+
+class FoodShop
+  attr_reader :members, :default
+
+  def initialize(default)
+    @members = [:sandwich, :soup, :salad]
+    @default = default
+  end
+
+  def text_of(s)
+    {sandwich: "Sandwich", soup: "Soup of the day", salad: "Garden Salad"}[s]
+  end
+
+  def sandwich()
+    puts "Making a sandwich"
+
+  end
+
+  def soup()
+    soups = %w{Tomato Cheese Tortilla}
+    puts "Making a bowl of #{soups.sample}"
+  end
+
+  def salad()
+    puts "Making a salad"
+  end
+end
+
+fs = FoodShop.new(:normal)
+Dialog.checkboxes(fs, label: "What'll it be?")
 
