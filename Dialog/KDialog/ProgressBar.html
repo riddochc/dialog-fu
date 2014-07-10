@@ -482,27 +482,27 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397</pre>
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 412</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_servicename'>servicename</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='label'>show_cancel:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Working...</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autoclose:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_bus'>bus</span> <span class='op'>=</span> <span class='const'>DBus</span><span class='op'>::</span><span class='const'>SessionBus</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
@@ -577,12 +577,12 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-401
-402
-403</pre>
+433
+434
+435</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 401</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 433</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_canceled?'>canceled?</span>
   <span class='ivar'>@progress</span><span class='period'>.</span><span class='id identifier rubyid_wasCancelled'>wasCancelled</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -636,17 +636,17 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-457
-458
-459
-460
-461
-462
-463
-464</pre>
+489
+490
+491
+492
+493
+494
+495
+496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 457</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 489</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='kw'>begin</span>
@@ -725,13 +725,13 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-450
-451
-452
-453</pre>
+482
+483
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 450</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 482</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='ivar'>@progress</span><span class='period'>.</span><span class='id identifier rubyid_setLabelText'>setLabelText</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
@@ -786,12 +786,12 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-434
-435
-436</pre>
+466
+467
+468</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 434</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 466</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max'>max</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='ivar'>@progress</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>maximum</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -865,13 +865,13 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-442
-443
-444
-445</pre>
+474
+475
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 442</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 474</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max='>max=</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span>
   <span class='ivar'>@progress</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>maximum</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_n'>n</span>
@@ -926,17 +926,17 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-424
-425
-426
-427
-428
-429
-430
-431</pre>
+456
+457
+458
+459
+460
+461
+462
+463</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 424</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 456</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_succ'>succ</span>
   <span class='kw'>begin</span>
@@ -990,12 +990,12 @@ An instance of this object is easily created by the <span class='object_link'><a
       <pre class="lines">
 
 
-408
-409
-410</pre>
+440
+441
+442</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 408</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 440</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='ivar'>@progress</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -1070,13 +1070,13 @@ Values outside the range of 0..max will be ignored.</p>
       <pre class="lines">
 
 
-417
-418
-419
-420</pre>
+449
+450
+451
+452</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 449</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_value='>value=</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span>
   <span class='ivar'>@progress</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_n'>n</span>
@@ -1092,7 +1092,7 @@ Values outside the range of 0..max will be ignored.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Jul  9 23:22:20 2014 by
+  Generated on Thu Jul 10 00:43:09 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>

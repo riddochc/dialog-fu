@@ -469,7 +469,8 @@
 <p>Present a set of checkboxes to the user, calls the selected method on the choices object.</p>
 </div>
 <div class="paragraph">
-<p>When more than one item is selected, the methods will be executed in the order they occur in choices#members</p>
+<p>Alternatively, sets boolean properties on a Struct-like choices object.
+When more than one item is selected, the methods will be executed in the order they occur in choices#members</p>
 </div>
 
   </div>
@@ -481,7 +482,17 @@
     
       
         <p class="example_title"><div class='inline'><div class="paragraph">
-<p>Using the checkboxes API</p>
+<p>Using the checkboxes API, the simple Struct way&#8230;</p>
+</div></div></p>
+      
+      <pre class="example code"><code><span class='const'>FoodSelection</span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:sandwich</span><span class='comma'>,</span> <span class='symbol'>:soup</span><span class='comma'>,</span> <span class='symbol'>:salad</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_fs'>fs</span> <span class='op'>=</span> <span class='const'>FoodSelection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='const'>Dialog</span><span class='period'>.</span><span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>What&#39;ll it be?</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>  <span class='comment'># Suppose user chooses sandwich and salad...
+</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_fs'>fs</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>  <span class='comment'># =&gt; #&lt;struct sandwich=true, soup=false, salad=false&gt;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><div class="paragraph">
+<p>Using the checkboxes API, dispatching methods</p>
 </div></div></p>
       
       <pre class="example code"><code><span class='kw'>class</span> <span class='const'>FoodShop</span>
@@ -532,6 +543,7 @@
 * A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
 * A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
 * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* OR: accessor methods with the same names as the symbols in #members, such as would be created by ruby&#8217;s built-in Struct.new
 * Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
@@ -600,12 +612,12 @@
       <pre class="lines">
 
 
-226
-227
-228</pre>
+243
+244
+245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 226</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='rparen'>)</span>
@@ -659,18 +671,18 @@
       <pre class="lines">
 
 
-360
-361
-362
-363
-364
-365
-366
-367
-368</pre>
+392
+393
+394
+395
+396
+397
+398
+399
+400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_c'>c</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -924,7 +936,8 @@ block is called.  If not, the block is ignored.</p>
 <p>Present a dropdown box, calls the selected method on the choices object.</p>
 </div>
 <div class="paragraph">
-<p>Similar to a radio button selection; only one selection can be made.</p>
+<p>Alternatively, sets boolean properties on a Struct-like choices object.
+Similar to a radio button selection; only one selection can be made.</p>
 </div>
 
   </div>
@@ -948,6 +961,7 @@ block is called.  If not, the block is ignored.</p>
 * A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
 * A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
 * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* OR: accessor methods with the same names as the symbols in #members, such as would be created by ruby&#8217;s built-in Struct.new
 * Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
@@ -1016,8 +1030,6 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-159
-160
 161
 162
 163
@@ -1042,10 +1054,20 @@ block is called.  If not, the block is ignored.</p>
 182
 183
 184
-185</pre>
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dropdown'>dropdown</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Select one below</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--combobox</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='rbracket'>]</span>
@@ -1067,8 +1089,16 @@ block is called.  If not, the block is ignored.</p>
 
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sel'>sel</span><span class='op'>|</span>
     <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='id identifier rubyid_text_to_choices'>text_to_choices</span><span class='lbracket'>[</span><span class='id identifier rubyid_sel'>sel</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
       <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span>
+        <span class='kw'>unless</span> <span class='id identifier rubyid_c'>c</span> <span class='op'>==</span> <span class='id identifier rubyid_selected'>selected</span>
+          <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
     <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
@@ -1235,46 +1265,46 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
 342
 343
 344
 345
-346</pre>
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 310</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filepicker'>filepicker</span><span class='lparen'>(</span><span class='label'>action:</span> <span class='symbol'>:save</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:file</span><span class='comma'>,</span> <span class='label'>dir:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HOME</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>multiple:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--separate-output</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -1365,12 +1395,12 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-353
-354
-355</pre>
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 385</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_icon'>icon</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--geticon</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--help</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -1735,12 +1765,12 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-296
-297
-298</pre>
+328
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 328</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_notification'>notification</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='int'>3</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--passivepopup</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -1898,17 +1928,17 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-473
-474
-475
-476
-477
-478
-479
-480</pre>
+505
+506
+507
+508
+509
+510
+511
+512</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 473</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 505</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progressbar'>progressbar</span><span class='lparen'>(</span><span class='label'>steps:</span> <span class='int'>100</span><span class='comma'>,</span> <span class='label'>title:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Progress Bar</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>show_cancel:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Working...</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autoclose:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_out'>out</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='const'>Open3</span><span class='period'>.</span><span class='id identifier rubyid_capture2'>capture2</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>kdialog</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--progressbar</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
@@ -1937,6 +1967,9 @@ just a little box (usually above the taskbar) in the notification area that goes
     <div class="paragraph">
 <p>Present a set of radio buttons to the user, calls the selected method on the choices object.</p>
 </div>
+<div class="paragraph">
+<p>Alternatively, sets boolean properties on a Struct-like choices object.</p>
+</div>
 
   </div>
 </div>
@@ -1959,6 +1992,7 @@ just a little box (usually above the taskbar) in the notification area that goes
 * A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
 * A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
 * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* OR: accessor methods with the same names as the symbols in #members, such as would be created by ruby&#8217;s built-in Struct.new
 * Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
@@ -2007,12 +2041,12 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-235
-236
-237</pre>
+254
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_radiobuttons'>radiobuttons</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:radio</span><span class='rparen'>)</span>
@@ -2128,22 +2162,22 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499</pre>
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 487</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 519</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_arglist'>arglist</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>kdialog</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_arglist'>arglist</span>
@@ -2203,6 +2237,7 @@ just a little box (usually above the taskbar) in the notification area that goes
 * A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
 * A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
 * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* OR: accessor methods with the same names as the symbols in #members, such as would be created by ruby&#8217;s built-in Struct.new
 * Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
@@ -2286,25 +2321,6 @@ radio buttons, only one selection)</p>
       <pre class="lines">
 
 
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
 268
 269
@@ -2327,10 +2343,42 @@ radio buttons, only one selection)</p>
 286
 287
 288
-289</pre>
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 248</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--separate-output</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -2363,13 +2411,26 @@ radio buttons, only one selection)</p>
     <span class='kw'>end</span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sel'>sel</span><span class='op'>|</span>
-    <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='id identifier rubyid_sel'>sel</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span> <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbrace'>}</span>
-    <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_values_at'>values_at</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+    <span class='id identifier rubyid_offsets'>offsets</span> <span class='op'>=</span> <span class='id identifier rubyid_sel'>sel</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span> <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_values_at'>values_at</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_offsets'>offsets</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_found_writer'>found_writer</span> <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='id identifier rubyid_selected'>selected</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
       <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
       <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
         <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
+      <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_found_writer'>found_writer</span> <span class='op'>=</span> <span class='kw'>true</span>
       <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
         <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='comment'># Not selected
+</span>    <span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span> <span class='op'>-</span> <span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+      <span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
       <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -2514,7 +2575,7 @@ horizontal and vertical scrollbars.  For small amounts of text, use #messagebox<
 </div>
 
     <div id="footer">
-  Generated on Wed Jul  9 23:22:20 2014 by
+  Generated on Thu Jul 10 00:43:09 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>
