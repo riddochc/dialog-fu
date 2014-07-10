@@ -4,7 +4,7 @@ require 'dbus'
 
 module Dialog::KDialog
 
-  # Standard dialog boxes
+  # Present a standard dialog box
   # 
   # The valid combinations of boolean parameters specifying the type of buttons available are as follows:
   #
@@ -67,7 +67,7 @@ module Dialog::KDialog
     end
   end
 
-  # A message box, for displaying a little text to the user.  
+  # Present a message box, for displaying a little text to the user.
   # For longer, multi-line text, you may prefer to use #textbox.
   # Contrasting with the standard dialog boxes, the button presented to the user
   #   only has the effect of closing the box.
@@ -83,7 +83,7 @@ module Dialog::KDialog
     run([cmdtype, text])
   end
 
-  # A window for showing the user a large amount of text, potentially using
+  # Present a window for showing the user a large amount of text, potentially using
   # horizontal and vertical scrollbars.  For small amounts of text, use #messagebox
   #
   # @param text [String IO] The text to send to the user, or a readable IO object.
@@ -143,7 +143,7 @@ module Dialog::KDialog
   #   @param choices [#members] An object with an attribute for each choice, and a +#members+ method which
   #     returns a list of those attributes to be used.
 
-  # A dropdown box
+  # Present a dropdown box, calls the selected method on the choices object.
   #
   # This is similar to a radio button selection; only one selection can be made.
   #
@@ -159,7 +159,7 @@ module Dialog::KDialog
     }
   end
 
-  # Present a set of checkboxes to the user
+  # Present a set of checkboxes to the user, calls the selected method on the choices object.
   #
   # Using this method may be easier than using #selection, as you don't need to indicate you want checkboxes.
   #
@@ -179,7 +179,7 @@ module Dialog::KDialog
     selection(choices, label: label, type: :check, default: default)
   end
 
-  # Present a set of radio buttons to the user
+  # Present a set of radio buttons to the user, calls the selected method on the choices object.
   #
   # Using this method may be easier than using #selection, as you don't need to indicate you want radio buttons.
   # 
@@ -292,7 +292,7 @@ module Dialog::KDialog
     end
   end
 
-  # Icon Picker
+  # Present an icon picker
   #
   # Allows the user to choose an icon among those available to KDE.
   #
@@ -301,7 +301,7 @@ module Dialog::KDialog
     run(["--geticon", "--help"])
   end
 
-  # Color Picker
+  # Present a color picker
   #
   # @return [Array<Integer> nil] An array of [red, green, blue] 8-bit color components, or nil if 'cancel' pressed.
   def color()
@@ -319,7 +319,7 @@ module Dialog::KDialog
   class ProgressBar
     # @param servicename [String] The dbus service to connect to, provided by kdialog's output
     # @param path [String] The path to the progress bar, provided by kdialog's output
-    # @!macro [new] pgargs
+    # @!macro [new] pbargs
     #   @param show_cancel [Boolean] If true, display a cancel button for the user to request early stop of work
     #   @param label [String] Text to display above the progress bar, typically providing information about current activity
     #   @param autoclose [Boolean] If true, the window will close when the progress is set to the highest value
