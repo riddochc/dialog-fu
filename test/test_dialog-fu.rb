@@ -66,6 +66,12 @@ Dialog.autosetup  # Figure out what implementation to use
 #  end
 #end
 
-fs = Struct.new(:sandwich, :soup, :salad).new()
-Dialog.radiobuttons(fs, label: "What'll it be?")
-puts fs.inspect
+#fs = Struct.new(:sandwich, :soup, :salad).new()
+#Dialog.radiobuttons(fs, label: "What'll it be?")
+#puts fs.inspect
+
+#Dialog.calendar() {|date|
+#  puts "The day of week for #{date} is #{Date::DAYNAMES[date.wday]}"
+#}
+#day = Dialog.calendar()
+#puts "The day of week for #{day} is #{Date::DAYNAMES[day.wday]}"

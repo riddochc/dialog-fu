@@ -511,6 +511,23 @@ module Dialog::KDialog
     ProgressBar.new(servicename, path, label: label, autoclose: autoclose, &blk)
   end
 
+  # Prompt for a date, providing a calendar
+  #
+  # @macro labelparam
+  # @return [Date nil] A date object, or nil if user canceled
+  # @yieldparam date [Date] The date selected by the user, if any.  Otherwise, the block is not run.
+  def calendar(label: "Choose a date")
+    d = nil
+    out, status = *run(["--calendar", label])
+    if status == false  # NOTE: kdialog has exit status of 1 on success and 0 on failure, in this case!
+      d = Date.parse(out)
+      if !d.nil? and block_given?
+        yield(d)
+      end
+    end
+    d
+  end
+
   # @api private
   # @param arglist [Array<String>] List of command-line arguments for kdialog
   # @raise [StandardError] Any exception raised by Open3#capture2
