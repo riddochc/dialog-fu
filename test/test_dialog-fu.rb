@@ -40,33 +40,32 @@ Dialog.autosetup  # Figure out what implementation to use
 #opts = colorchoice.new(false, false, true, false)
 #radiobuttons(opts, label: "Choose a color", default: :blue)
 
-class FoodShop
-  attr_reader :members, :default
+#class FoodShop
+#  attr_reader :members, :default
+#
+#  def initialize(default)
+#    @members = [:sandwich, :soup, :salad]
+#    @default = default
+#  end
+#
+#  def text_of(s)
+#    {sandwich: "Sandwich", soup: "Soup of the day", salad: "Garden Salad"}[s]
+#  end
+#
+#  def sandwich()
+#    puts "Making a sandwich"
+#  end
+#
+#  def soup()
+#    soups = %w{Tomato Cheese Tortilla}
+#    puts "Making a bowl of #{soups.sample}"
+#  end
+#
+#  def salad()
+#    puts "Making a salad"
+#  end
+#end
 
-  def initialize(default)
-    @members = [:sandwich, :soup, :salad]
-    @default = default
-  end
-
-  def text_of(s)
-    {sandwich: "Sandwich", soup: "Soup of the day", salad: "Garden Salad"}[s]
-  end
-
-  def sandwich()
-    puts "Making a sandwich"
-
-  end
-
-  def soup()
-    soups = %w{Tomato Cheese Tortilla}
-    puts "Making a bowl of #{soups.sample}"
-  end
-
-  def salad()
-    puts "Making a salad"
-  end
-end
-
-fs = FoodShop.new(:normal)
-Dialog.checkboxes(fs, label: "What'll it be?")
-
+fs = Struct.new(:sandwich, :soup, :salad).new()
+Dialog.radiobuttons(fs, label: "What'll it be?")
+puts fs.inspect

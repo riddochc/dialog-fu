@@ -144,12 +144,14 @@ module Dialog::KDialog
   #     * A +#members+ method which returns a list of the choices available (as an array of symbols)
   #     * A +#default+ method which returns a symbol naming the attribute or method which will be preselected for the user
   #     * Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+  #     * OR: accessor methods with the same names as the symbols in #members, such as would be created by ruby's built-in Struct.new
   #     * Optionally, a +#text_of+ method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol
   # @!macro [new] selectionblock
   #  @yieldparam selection [Symbol] If a block is provided, it will be called with the selection, *instead of* the associated method on the choices object.
 
   # Present a dropdown box, calls the selected method on the choices object.
   #
+  # Alternatively, sets boolean properties on a Struct-like choices object.
   # Similar to a radio button selection; only one selection can be made.
   #
   # @macro choiceparam
@@ -176,8 +178,16 @@ module Dialog::KDialog
 
     run(cmd) {|sel|
       selected = text_to_choices[sel]
+      writer = (selected.to_s + "=").to_sym
       if block_given?
         yield(selected)
+      elsif choices.respond_to?(writer)
+        choices.send(writer, true)
+        choices.members.each do |c|
+          unless c == selected
+            choices.send((c.to_s + "=").to_sym, false)
+          end
+        end
       elsif choices.respond_to?(selected)
         choices.send(selected)
       end
@@ -186,6 +196,7 @@ module Dialog::KDialog
 
   # Present a set of checkboxes to the user, calls the selected method on the choices object.
   #
+  # Alternatively, sets boolean properties on a Struct-like choices object.
   # When more than one item is selected, the methods will be executed in the order they occur in choices#members
   #
   # @macro choiceparam
@@ -193,7 +204,13 @@ module Dialog::KDialog
   # @macro selectionblock
   # @macro runreturn
   #
-  # @example Using the checkboxes API
+  # @example Using the checkboxes API, the simple Struct way...
+  #    FoodSelection = Struct.new(:sandwich, :soup, :salad)
+  #    fs = FoodSelection.new
+  #    Dialog.checkboxes(fs, label: "What'll it be?")  # Suppose user chooses sandwich and salad...
+  #    puts fs.inspect  # => #<struct sandwich=true, soup=false, salad=false>
+  #
+  # @example Using the checkboxes API, dispatching methods
   #    class FoodShop
   #      attr_reader :members, :default
   #
@@ -228,6 +245,8 @@ module Dialog::KDialog
   end
 
   # Present a set of radio buttons to the user, calls the selected method on the choices object.
+  #
+  # Alternatively, sets boolean properties on a Struct-like choices object.
   #
   # @macro choiceparam
   # @macro labelparam
@@ -276,13 +295,26 @@ module Dialog::KDialog
       end
     }
     run(cmd) do |sel|
-      selected = sel.each_line.map{|l| l.chomp.to_i}
-      choices.members.values_at(*selected).each do |m|
+      offsets = sel.each_line.map{|l| l.chomp.to_i}
+      selected = choices.members.values_at(*offsets)
+      found_writer = false
+      selected.each do |m|
         method = m.to_sym
+        writer = (m.to_s + '=').to_sym
         if block_given?
           yield(m)
+        elsif choices.respond_to?(writer)
+          choices.send(writer, true)
+          found_writer = true
         elsif choices.respond_to?(m)
           choices.send(m)
+        end
+      end
+      # Not selected
+      (choices.members - selected).each do |m|
+        writer = (m.to_s + '=').to_sym
+        if choices.respond_to?(writer)
+          choices.send(writer, false)
         end
       end
     end
