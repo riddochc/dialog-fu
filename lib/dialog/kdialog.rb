@@ -528,6 +528,26 @@ module Dialog::KDialog
     d
   end
 
+  # Prompt for a number with a horizontal sliding numeric input
+  #
+  # @macro labelparam
+  # @param range [Range] The range of numbers the horizontal space maps to
+  # @param step [Integer] The distance between each point along the range
+  # @return [Integer nil] An integer, or nil if user canceled
+  # @yieldparam n [Integer] The number selected by the user, if any.  Otherwise, the block is not run.
+  def slider(label: "Choose an amount", range: Range.new(0, 10), step: 1)
+    cmd = ["--slider", label, range.begin.to_s, range.end.to_s, step.to_s]
+    n = nil
+    out, status = *run(cmd)
+    if status == false # NOTE: same issue as in calendar
+      n = out.to_i
+      if block_given?
+        yield(n)
+      end
+    end
+    n
+  end
+
   # @api private
   # @param arglist [Array<String>] List of command-line arguments for kdialog
   # @raise [StandardError] Any exception raised by Open3#capture2

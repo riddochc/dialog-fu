@@ -75,3 +75,8 @@ Dialog.autosetup  # Figure out what implementation to use
 #}
 #day = Dialog.calendar()
 #puts "The day of week for #{day} is #{Date::DAYNAMES[day.wday]}"
+
+#n = Dialog.slider(label: "Pick a number", range: 1..25 ) #  {|n| puts "You chose #{n}" }
+#puts "You chose #{n}"
+
+
