@@ -112,7 +112,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#checkboxes-instance_method" title="#checkboxes (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>checkboxes</strong>(choices, label: &quot;&quot;, default: nil) </a>
+      <a href="#checkboxes-instance_method" title="#checkboxes (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>checkboxes</strong>(choices, label: &quot;&quot;) {|selection| ... }</a>
     
 
     
@@ -127,7 +127,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Present a set of checkboxes to the user.</p>
+<p>Present a set of checkboxes to the user, calls the selected method on the choices object.</p>
 </div></div></span>
   
 </li>
@@ -151,31 +151,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Color Picker.</p>
-</div></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#combobox-instance_method" title="#combobox (instance method)">- (Object) <strong>combobox</strong>(choices, label: &quot;&quot;) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>A dropdown box.</p>
+<p>Present a color picker.</p>
 </div></div></span>
   
 </li>
@@ -199,7 +175,31 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Standard dialog boxes.</p>
+<p>Present a standard dialog box.</p>
+</div></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dropdown-instance_method" title="#dropdown (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>dropdown</strong>(choices, label: &quot;Select one below&quot;) {|selection| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><div class="paragraph">
+<p>Present a dropdown box, calls the selected method on the choices object.</p>
 </div></div></span>
   
 </li>
@@ -247,7 +247,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Icon Picker.</p>
+<p>Present an icon picker.</p>
 </div></div></span>
   
 </li>
@@ -295,7 +295,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>A message box, for displaying a little text to the user.</p>
+<p>Present a message box, for displaying a little text to the user.</p>
 </div></div></span>
   
 </li>
@@ -328,7 +328,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#progressbar-instance_method" title="#progressbar (instance method)">- (ProgressBar) <strong>progressbar</strong>(steps: 100, title: &quot;Progress Bar&quot;, show_cancel: false, label: &quot;Working...&quot;, autoclose: true, &amp;blk) </a>
+      <a href="#progressbar-instance_method" title="#progressbar (instance method)">- (ProgressBar) <strong>progressbar</strong>(steps: 100, title: &quot;Progress Bar&quot;, show_cancel: false, label: &quot;Working...&quot;, autoclose: true) {|bar| ... }</a>
     
 
     
@@ -352,7 +352,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#radiobuttons-instance_method" title="#radiobuttons (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>radiobuttons</strong>(choices, label: &quot;&quot;, default: nil) </a>
+      <a href="#radiobuttons-instance_method" title="#radiobuttons (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>radiobuttons</strong>(choices, label: &quot;&quot;) </a>
     
 
     
@@ -367,7 +367,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Present a set of radio buttons to the user.</p>
+<p>Present a set of radio buttons to the user, calls the selected method on the choices object.</p>
 </div></div></span>
   
 </li>
@@ -400,7 +400,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#selection-instance_method" title="#selection (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>selection</strong>(choices, label: &quot;&quot;, type: :check, default: nil) </a>
+      <a href="#selection-instance_method" title="#selection (instance method)">- (Array&lt;(String, Boolean)&gt;) <strong>selection</strong>(choices, label: &quot;&quot;, type: :check) </a>
     
 
     
@@ -411,11 +411,11 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Implementation of radiobuttons and checkboxes; user selections.</p>
+<p>Implementation of radiobuttons and checkboxes.</p>
 </div></div></span>
   
 </li>
@@ -439,7 +439,7 @@
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>A window for showing the user a large amount of text, potentially using horizontal and vertical scrollbars.</p>
+<p>Present a window for showing the user a large amount of text, potentially using horizontal and vertical scrollbars.</p>
 </div></div></span>
   
 </li>
@@ -457,7 +457,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="checkboxes-instance_method">
   
-    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>checkboxes</strong>(choices, label: &quot;&quot;, default: nil) 
+    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>checkboxes</strong>(choices, label: &quot;&quot;) {|selection| ... }
   
 
   
@@ -466,10 +466,10 @@
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>Present a set of checkboxes to the user</p>
+<p>Present a set of checkboxes to the user, calls the selected method on the choices object.</p>
 </div>
 <div class="paragraph">
-<p>Using this method may be easier than using #selection, as you don&#8217;t need to indicate you want checkboxes.</p>
+<p>When more than one item is selected, the methods will be executed in the order they occur in choices#members</p>
 </div>
 
   </div>
@@ -481,12 +481,37 @@
     
       
         <p class="example_title"><div class='inline'><div class="paragraph">
-<p>Using a Struct for checkboxes</p>
+<p>Using the checkboxes API</p>
 </div></div></p>
       
-      <pre class="example code"><code><span class='const'>Foodselection</span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:salad</span><span class='comma'>,</span> <span class='symbol'>:soup</span><span class='comma'>,</span> <span class='symbol'>:sandwich</span><span class='comma'>,</span> <span class='symbol'>:cookie</span><span class='comma'>,</span> <span class='symbol'>:drink</span><span class='rparen'>)</span>
-<span class='id identifier rubyid_choices'>choices</span> <span class='op'>=</span> <span class='const'>Foodselection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='kw'>false</span><span class='comma'>,</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>  <span class='comment'># sandwich and drink preselected
-</span><span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>What would you like for lunch?</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>FoodShop</span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:members</span><span class='comma'>,</span> <span class='symbol'>:default</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+    <span class='ivar'>@members</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='symbol'>:sandwich</span><span class='comma'>,</span> <span class='symbol'>:soup</span><span class='comma'>,</span> <span class='symbol'>:salad</span><span class='rbracket'>]</span>
+    <span class='ivar'>@default</span> <span class='op'>=</span> <span class='id identifier rubyid_default'>default</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_text_of'>text_of</span><span class='lparen'>(</span><span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+    <span class='lbrace'>{</span><span class='label'>sandwich:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Sandwich</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>soup:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Soup of the day</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>salad:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Garden Salad</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='lbracket'>[</span><span class='id identifier rubyid_s'>s</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_sandwich'>sandwich</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Making a sandwich</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_soup'>soup</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_soups'>soups</span> <span class='op'>=</span> <span class='qwords_beg'>%w{</span><span class='tstring_content'>Tomato</span><span class='words_sep'> </span><span class='tstring_content'>Cheese</span><span class='words_sep'> </span><span class='tstring_content'>Tortilla</span><span class='words_sep'>}</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Making a bowl of </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_soups'>soups</span><span class='period'>.</span><span class='id identifier rubyid_sample'>sample</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_salad'>salad</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Making a salad</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_fs'>fs</span> <span class='op'>=</span> <span class='const'>FoodShop</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:normal</span><span class='rparen'>)</span>
+<span class='const'>Dialog</span><span class='period'>.</span><span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>What&#39;ll it be?</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -497,14 +522,17 @@
         <span class='name'>choices</span>
       
       
-        <span class='type'>(<tt>#members</tt>)</span>
+        <span class='type'>(<tt>#members #default</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'><div class="paragraph">
-<p>An object with an attribute for each choice, and a <code>#members</code> method which
-returns a list of those attributes to be used.</p>
+<p>An object of a class with the following characteristics:
+* A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
+* A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
+* Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
     </li>
@@ -525,26 +553,28 @@ returns a list of those attributes to be used.</p>
       
     </li>
   
+</ul>
+
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
     <li>
       
-        <span class='name'>default</span>
+        <span class='name'>selection</span>
       
       
-        <span class='type'>(<tt>Array&lt;String&gt; String</tt>)</span>
+        <span class='type'>(<tt>Symbol</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'><div class="paragraph">
-<p>The name of the attribute to be pre-selected for the user,
-or a list of such names, in the case of checkboxes.  If not provided, the attribute&#8217;s value is
-tested, and if true, is selected.</p>
+<p>If a block is provided, it will be called with the selection, <strong>instead of</strong> the associated method on the choices object.</p>
 </div></div>
       
     </li>
   
 </ul>
-
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -570,15 +600,15 @@ tested, and if true, is selected.</p>
       <pre class="lines">
 
 
-178
-179
-180</pre>
+226
+227
+228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 226</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_checkboxes'>checkboxes</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -597,7 +627,7 @@ tested, and if true, is selected.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>Color Picker</p>
+<p>Present a color picker</p>
 </div>
 
   </div>
@@ -629,18 +659,18 @@ tested, and if true, is selected.</p>
       <pre class="lines">
 
 
-307
-308
-309
-310
-311
-312
-313
-314
-315</pre>
+360
+361
+362
+363
+364
+365
+366
+367
+368</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_c'>c</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -650,97 +680,6 @@ tested, and if true, is selected.</p>
      <span class='id identifier rubyid_out'>out</span><span class='lbracket'>[</span><span class='int'>5</span><span class='comma'>,</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='lparen'>(</span><span class='int'>16</span><span class='rparen'>)</span><span class='rbracket'>]</span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_c'>c</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="combobox-instance_method">
-  
-    - (<tt>Object</tt>) <strong>combobox</strong>(choices, label: &quot;&quot;) 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <div class="paragraph">
-<p>A dropdown box</p>
-</div>
-<div class="paragraph">
-<p>This is similar to a radio button selection; only one selection can be made.</p>
-</div>
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>choices</span>
-      
-      
-        <span class='type'>(<tt>#members</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><div class="paragraph">
-<p>An object with an attribute for each choice, and a <code>#members</code> method which
-returns a list of those attributes to be used.</p>
-</div></div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>label</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><div class="paragraph">
-<p>The text to display above input fields</p>
-</div></div>
-      
-    </li>
-  
-</ul>
-
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-153
-154
-155
-156
-157
-158
-159
-160</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 153</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_combobox'>combobox</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--combobox</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span> <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sel'>sel</span><span class='op'>|</span>
-    <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_sel'>sel</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
-    <span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span> <span class='op'>-</span> <span class='lbracket'>[</span><span class='id identifier rubyid_selected'>selected</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span><span class='rbrace'>}</span>
-    <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -759,7 +698,7 @@ returns a list of those attributes to be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>Standard dialog boxes</p>
+<p>Present a standard dialog box</p>
 </div>
 <div class="paragraph">
 <p>The valid combinations of boolean parameters specifying the type of buttons available are as follows:</p>
@@ -971,6 +910,176 @@ block is called.  If not, the block is ignored.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="dropdown-instance_method">
+  
+    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>dropdown</strong>(choices, label: &quot;Select one below&quot;) {|selection| ... }
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="paragraph">
+<p>Present a dropdown box, calls the selected method on the choices object.</p>
+</div>
+<div class="paragraph">
+<p>Similar to a radio button selection; only one selection can be made.</p>
+</div>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>choices</span>
+      
+      
+        <span class='type'>(<tt>#members #default</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>An object of a class with the following characteristics:
+* A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
+* A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
+* Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>The text to display above input fields</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>If a block is provided, it will be called with the selection, <strong>instead of</strong> the associated method on the choices object.</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;(String, Boolean)&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>the textual output of running kdialog, and whether it exited successfully</p>
+</div></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 159</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_dropdown'>dropdown</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Select one below</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--combobox</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_choices_to_text'>choices_to_text</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:text_of</span><span class='rparen'>)</span>
+      <span class='lbracket'>[</span><span class='id identifier rubyid_m'>m</span><span class='comma'>,</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_text_of'>text_of</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+    <span class='kw'>else</span>
+      <span class='lbracket'>[</span><span class='id identifier rubyid_m'>m</span><span class='comma'>,</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='rbrace'>}</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_text_to_choices'>text_to_choices</span> <span class='op'>=</span> <span class='id identifier rubyid_choices_to_text'>choices_to_text</span><span class='period'>.</span><span class='id identifier rubyid_invert'>invert</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:default</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--default</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_choices_to_text'>choices_to_text</span><span class='lbracket'>[</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span> <span class='id identifier rubyid_choices_to_text'>choices_to_text</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sel'>sel</span><span class='op'>|</span>
+    <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='id identifier rubyid_text_to_choices'>text_to_choices</span><span class='lbracket'>[</span><span class='id identifier rubyid_sel'>sel</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+      <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="filepicker-instance_method">
   
     - (<tt>Array&lt;String&gt; String</tt>) <strong>filepicker</strong>(action: :save, type: :file, dir: ENV[&#39;HOME&#39;], multiple: false, filter: nil) {|path| ... }
@@ -1126,46 +1235,46 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293</pre>
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 257</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 310</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filepicker'>filepicker</span><span class='lparen'>(</span><span class='label'>action:</span> <span class='symbol'>:save</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:file</span><span class='comma'>,</span> <span class='label'>dir:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HOME</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>multiple:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--separate-output</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
@@ -1221,7 +1330,7 @@ block is called.  If not, the block is ignored.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>Icon Picker</p>
+<p>Present an icon picker</p>
 </div>
 <div class="paragraph">
 <p>Allows the user to choose an icon among those available to KDE.</p>
@@ -1256,12 +1365,12 @@ block is called.  If not, the block is ignored.</p>
       <pre class="lines">
 
 
-300
-301
-302</pre>
+353
+354
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 300</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_icon'>icon</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--geticon</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--help</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -1485,7 +1594,7 @@ When this is true, the height parameter is required to be 1, otherwise this opti
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>A message box, for displaying a little text to the user.
+<p>Present a message box, for displaying a little text to the user.
 For longer, multi-line text, you may prefer to use #textbox.
 Contrasting with the standard dialog boxes, the button presented to the user
   only has the effect of closing the box.</p>
@@ -1626,12 +1735,12 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-243
-244
-245</pre>
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 243</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 296</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_notification'>notification</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='int'>3</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--passivepopup</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -1644,7 +1753,7 @@ just a little box (usually above the taskbar) in the notification area that goes
       <div class="method_details ">
   <h3 class="signature " id="progressbar-instance_method">
   
-    - (<tt><span class='object_link'><a href="KDialog/ProgressBar.html" title="Dialog::KDialog::ProgressBar (class)">ProgressBar</a></span></tt>) <strong>progressbar</strong>(steps: 100, title: &quot;Progress Bar&quot;, show_cancel: false, label: &quot;Working...&quot;, autoclose: true, &amp;blk) 
+    - (<tt><span class='object_link'><a href="KDialog/ProgressBar.html" title="Dialog::KDialog::ProgressBar (class)">ProgressBar</a></span></tt>) <strong>progressbar</strong>(steps: 100, title: &quot;Progress Bar&quot;, show_cancel: false, label: &quot;Working...&quot;, autoclose: true) {|bar| ... }
   
 
   
@@ -1694,8 +1803,76 @@ just a little box (usually above the taskbar) in the notification area that goes
       
     </li>
   
+    <li>
+      
+        <span class='name'>show_cancel</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>If true, display a cancel button for the user to request early stop of work</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>label</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>Text to display above the progress bar, typically providing information about current activity</p>
+</div></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>autoclose</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>If true, the window will close when the progress is set to the highest value</p>
+</div></div>
+      
+    </li>
+  
 </ul>
 
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>bar</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="KDialog/ProgressBar.html" title="Dialog::KDialog::ProgressBar (class)">ProgressBar</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><div class="paragraph">
+<p>An object for manipulating state of the progress bar, ensures proper closing at block exit</p>
+</div></div>
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -1721,17 +1898,17 @@ just a little box (usually above the taskbar) in the notification area that goes
       <pre class="lines">
 
 
-420
-421
-422
-423
-424
-425
-426
-427</pre>
+473
+474
+475
+476
+477
+478
+479
+480</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 420</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 473</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progressbar'>progressbar</span><span class='lparen'>(</span><span class='label'>steps:</span> <span class='int'>100</span><span class='comma'>,</span> <span class='label'>title:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Progress Bar</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>show_cancel:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Working...</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>autoclose:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_out'>out</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='const'>Open3</span><span class='period'>.</span><span class='id identifier rubyid_capture2'>capture2</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>kdialog</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--progressbar</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
@@ -1749,7 +1926,7 @@ just a little box (usually above the taskbar) in the notification area that goes
       <div class="method_details ">
   <h3 class="signature " id="radiobuttons-instance_method">
   
-    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>radiobuttons</strong>(choices, label: &quot;&quot;, default: nil) 
+    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>radiobuttons</strong>(choices, label: &quot;&quot;) 
   
 
   
@@ -1757,20 +1934,8 @@ just a little box (usually above the taskbar) in the notification area that goes
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><div class="paragraph">
-<p>It&#8217;s the caller&#8217;s responsibility to either specify a default,
-or make sure only one of the <em>choices</em> attributes is true in the <code>choices</code> parameter.</p>
-</div></div>
-  </div>
-
-<div class="paragraph">
-<p>Present a set of radio buttons to the user</p>
-</div>
-<div class="paragraph">
-<p>Using this method may be easier than using #selection, as you don&#8217;t need to indicate you want radio buttons.</p>
+    <div class="paragraph">
+<p>Present a set of radio buttons to the user, calls the selected method on the choices object.</p>
 </div>
 
   </div>
@@ -1784,14 +1949,17 @@ or make sure only one of the <em>choices</em> attributes is true in the <code>ch
         <span class='name'>choices</span>
       
       
-        <span class='type'>(<tt>#members</tt>)</span>
+        <span class='type'>(<tt>#members #default</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'><div class="paragraph">
-<p>An object with an attribute for each choice, and a <code>#members</code> method which
-returns a list of those attributes to be used.</p>
+<p>An object of a class with the following characteristics:
+* A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
+* A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
+* Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
     </li>
@@ -1808,24 +1976,6 @@ returns a list of those attributes to be used.</p>
         &mdash;
         <div class='inline'><div class="paragraph">
 <p>The text to display above input fields</p>
-</div></div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>default</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;String&gt; String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><div class="paragraph">
-<p>The name of the attribute to be pre-selected for the user,
-or a list of such names, in the case of checkboxes.  If not provided, the attribute&#8217;s value is
-tested, and if true, is selected.</p>
 </div></div>
       
     </li>
@@ -1857,15 +2007,15 @@ tested, and if true, is selected.</p>
       <pre class="lines">
 
 
-192
-193
-194</pre>
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 192</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 235</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_radiobuttons'>radiobuttons</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:radio</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='id identifier rubyid_default'>default</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_radiobuttons'>radiobuttons</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:radio</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1978,22 +2128,22 @@ tested, and if true, is selected.</p>
       <pre class="lines">
 
 
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446</pre>
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 434</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 487</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_arglist'>arglist</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>kdialog</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_arglist'>arglist</span>
@@ -2016,7 +2166,7 @@ tested, and if true, is selected.</p>
       <div class="method_details ">
   <h3 class="signature " id="selection-instance_method">
   
-    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>selection</strong>(choices, label: &quot;&quot;, type: :check, default: nil) 
+    - (<tt>Array&lt;(String, Boolean)&gt;</tt>) <strong>selection</strong>(choices, label: &quot;&quot;, type: :check) 
   
 
   
@@ -2024,17 +2174,12 @@ tested, and if true, is selected.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><div class="paragraph">
-<p>If <code>type</code> is <code>:radio</code>, it&#8217;s the caller&#8217;s responsibility to either specify a default,
-or make sure only one of the <em>choices</em> attributes is true in the <code>choices</code> parameter.</p>
-</div></div>
-  </div>
-
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
 <div class="paragraph">
-<p>Implementation of radiobuttons and checkboxes; user selections.</p>
+<p>Implementation of radiobuttons and checkboxes.</p>
 </div>
 
   </div>
@@ -2048,14 +2193,17 @@ or make sure only one of the <em>choices</em> attributes is true in the <code>ch
         <span class='name'>choices</span>
       
       
-        <span class='type'>(<tt>#members</tt>)</span>
+        <span class='type'>(<tt>#members #default</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'><div class="paragraph">
-<p>An object with an attribute for each choice, and a <code>#members</code> method which
-returns a list of those attributes to be used.</p>
+<p>An object of a class with the following characteristics:
+* A <code>#members</code> method which returns a list of the choices available (as an array of symbols)
+* A <code>#default</code> method which returns a symbol naming the attribute or method which will be preselected for the user
+* Other methods of the object to be called when a choice is made, named according to symbols listed by #members
+* Optionally, a <code>#text_of</code> method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol</p>
 </div></div>
       
     </li>
@@ -2072,24 +2220,6 @@ returns a list of those attributes to be used.</p>
         &mdash;
         <div class='inline'><div class="paragraph">
 <p>The text to display above input fields</p>
-</div></div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>default</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;String&gt; String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><div class="paragraph">
-<p>The name of the attribute to be pre-selected for the user,
-or a list of such names, in the case of checkboxes.  If not provided, the attribute&#8217;s value is
-tested, and if true, is selected.</p>
 </div></div>
       
     </li>
@@ -2156,66 +2286,90 @@ radio buttons, only one selection)</p>
       <pre class="lines">
 
 
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236</pre>
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/dialog/kdialog.rb', line 248</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='comma'>,</span> <span class='label'>default:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_selection'>selection</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='comma'>,</span> <span class='label'>label:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>type:</span> <span class='symbol'>:check</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--separate-output</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
   <span class='kw'>when</span> <span class='symbol'>:check</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--checklist</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>when</span> <span class='symbol'>:radio</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--radiolist</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>when</span> <span class='symbol'>:dropdown</span>
+
   <span class='kw'>else</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>UnknownSelectionType</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unknown selection type</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_caller'>caller</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_label'>label</span>
+  <span class='id identifier rubyid_default'>default</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:default</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+              <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+            <span class='kw'>else</span>
+              <span class='kw'>nil</span>
+            <span class='kw'>end</span>
   <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_default'>default</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>and</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_c'>c</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='id identifier rubyid_default'>default</span> <span class='op'>==</span> <span class='id identifier rubyid_c'>c</span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='id identifier rubyid_default'>default</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_c'>c</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>on</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:text_of</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_text_of'>text_of</span><span class='lparen'>(</span><span class='id identifier rubyid_c'>c</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_c'>c</span> <span class='op'>==</span> <span class='id identifier rubyid_default'>default</span>
+      <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>on</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_cmd'>cmd</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>off</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
     <span class='kw'>end</span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_cmd'>cmd</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sel'>sel</span><span class='op'>|</span>
     <span class='id identifier rubyid_selected'>selected</span> <span class='op'>=</span> <span class='id identifier rubyid_sel'>sel</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span> <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbrace'>}</span>
-    <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='period'>.</span><span class='id identifier rubyid_with_index'>with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_box'>box</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
-      <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_box'>box</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
-      <span class='kw'>if</span> <span class='id identifier rubyid_selected'>selected</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
-      <span class='kw'>else</span>
-        <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_values_at'>values_at</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_selected'>selected</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+      <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+        <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
+      <span class='kw'>elsif</span> <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_choices'>choices</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span>
       <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -2237,7 +2391,7 @@ radio buttons, only one selection)</p>
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>A window for showing the user a large amount of text, potentially using
+<p>Present a window for showing the user a large amount of text, potentially using
 horizontal and vertical scrollbars.  For small amounts of text, use #messagebox</p>
 </div>
 
@@ -2360,7 +2514,7 @@ horizontal and vertical scrollbars.  For small amounts of text, use #messagebox<
 </div>
 
     <div id="footer">
-  Generated on Mon Jul  7 23:48:55 2014 by
+  Generated on Wed Jul  9 23:22:20 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.4 (ruby-2.1.2).
 </div>
