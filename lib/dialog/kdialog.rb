@@ -250,14 +250,21 @@ module Dialog::KDialog
   #      end
   #    end
   #
-  #    fs = FoodShop.new(:normal)
+  #    fs = FoodShop.new(:sandwich)  # Sandwich is default
   #    Dialog.checkboxes(fs, label: "What'll it be?") # Suppose user selects sandwich and soup...
-  #    # This prints:
+  #    ### This prints:
   #    # Making a sandwich
   #    # Making a bowl of Cheese
   #
-  def checkboxes(choices, label: "")
-    selection(choices, label: label, type: :check)
+  # @example Using a block
+  #    fs = FoodShop.new(:sandwich)
+  #    Dialog.checkboxes(fs, label: "What'll it be?") {|food|  # Suppose the user selects soup and salad
+  #      puts "You mean a #{food.inspect}?"
+  #    }
+  #    ### This prints:
+  #    # You mean a :soup?
+  #    # You mean a :salad?
+  #
   def checkboxes(choices, label: "", &blk)
     selection(choices, label: label, type: :check, &blk)
   end

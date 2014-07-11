@@ -17,6 +17,7 @@ class DialogTests
               dropdown_return: "Dropdown return value",
               messagebox_normal: "Normal message box",
               messagebox_badarg: "Message box with invalid argument",
+              checkboxes_yield: "Checkboxes with block",
               }
     @members = @tests.keys
   end
@@ -64,6 +65,13 @@ class DialogTests
       puts "Properly caught an argument error for using the wrong type."
     end
   end
+  def checkboxes_yield
+    fc = FoodChoices.new()
+    retval = Dialog.checkboxes(fc, label: "Choose some food!") {|c|
+      puts "You checked #{c}"
+    }
+    puts "You should've seen a 'You checked x' line for each thing you checked."
+  end
 end
 
 tests = DialogTests.new
@@ -103,34 +111,8 @@ end
 #opts = colorchoice.new(false, false, true, false)
 #radiobuttons(opts, label: "Choose a color", default: :blue)
 
-#class FoodShop
-#  attr_reader :members, :default
-#
-#  def initialize(default)
-#    @members = [:sandwich, :soup, :salad]
-#    @default = default
-#  end
-#
-#  def text_of(s)
-#    {sandwich: "Sandwich", soup: "Soup of the day", salad: "Garden Salad"}[s]
-#  end
-#
-#  def sandwich()
-#    puts "Making a sandwich"
-#  end
-#
-#  def soup()
-#    soups = %w{Tomato Cheese Tortilla}
-#    puts "Making a bowl of #{soups.sample}"
-#  end
-#
-#  def salad()
-#    puts "Making a salad"
-#  end
-#end
-
 #fs = Struct.new(:sandwich, :soup, :salad).new()
-#Dialog.radiobuttons(fs, label: "What'll it be?")
+#Dialog.checkboxes(fs, label: "What'll it be?")
 #puts fs.inspect
 
 #Dialog.calendar() {|date|
