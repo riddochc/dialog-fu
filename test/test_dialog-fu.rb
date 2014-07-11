@@ -11,12 +11,14 @@ class DialogTests
   attr_reader :members
   def initialize()
     @tests = {dialogbox_return: "Dialog Box return value",
-              dialogbox_block: "Dialog Box block",
+              dialogbox_block: "Dialog Box with block",
               dialogbox_cancelable: "Dialog Box with cancel button",
               dialogbox_warning: "Dialog Box in warning style",
               dropdown_return: "Dropdown return value",
               messagebox_normal: "Normal message box",
               messagebox_badarg: "Message box with invalid argument",
+              messagebox_sorry: "Message box in 'sorry' style",
+              messagebox_error: "Message box in 'error' style",
               checkboxes_yield: "Checkboxes with block",
               }
     @members = @tests.keys
@@ -54,17 +56,26 @@ class DialogTests
   end
 
   def messagebox_normal
-    retval = Dialog.messagebox("Kittens are cute.")
+    retval = Dialog.messagebox("Fact: kittens are cute")
     puts "#{retval.inspect} - should be true, unless something strange happened"
   end
 
   def messagebox_badarg
     begin
-      retval = Dialog.messagebox("Kittens are cute.", type: :foo)
+      retval = Dialog.messagebox("Fact: kittens are cute", type: :foo)
     rescue ArgumentError
       puts "Properly caught an argument error for using the wrong type."
     end
   end
+
+  def messagebox_sorry
+    Dialog.messagebox("Oops.", type: :sorry)
+  end
+
+  def messagebox_error
+    Dialog.messagebox("Error! On purpose, so it's not really", type: :error)
+  end
+
   def checkboxes_yield
     fc = FoodChoices.new()
     retval = Dialog.checkboxes(fc, label: "Choose some food!") {|c|
