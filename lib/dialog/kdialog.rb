@@ -258,6 +258,8 @@ module Dialog::KDialog
   #
   def checkboxes(choices, label: "")
     selection(choices, label: label, type: :check)
+  def checkboxes(choices, label: "", &blk)
+    selection(choices, label: label, type: :check, &blk)
   end
 
   # Present a set of radio buttons to the user, calls the selected method on the choices object.
@@ -267,8 +269,8 @@ module Dialog::KDialog
   # @macro choiceparam
   # @macro labelparam
   # @macro selectionreturn
-  def radiobuttons(choices, label: "")
-    selection(choices, label: label, type: :radio)
+  def radiobuttons(choices, label: "", &blk)
+    selection(choices, label: label, type: :radio, &blk)
   end
 
   # Implementation of radiobuttons and checkboxes.
