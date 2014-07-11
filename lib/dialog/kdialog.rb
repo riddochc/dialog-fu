@@ -69,20 +69,24 @@ module Dialog::KDialog
     status
   end
 
+  # @!macro [new] runreturn
+  #   @return [Array<(String, Boolean)>] The return value from #run
+
   # Present a message box, for displaying a little text to the user.
   # For longer, multi-line text, you may prefer to use #textbox.
   # Contrasting with the standard dialog boxes, the button presented to the user
   #   only has the effect of closing the box.
   #
   # @param type [:msgbox :sorry :error] The type of message box, affects the choice of icon shown in the box
-  # @!macro [new] runreturn
-  #   @return [Array<(String, Boolean)>]  the textual output of running kdialog, and whether it exited successfully
+  # @raise [ArgumentError] The value of type is something other than :msgbox, :sorry, or :error
+  # @return [true]
   def messagebox(text, type: :msgbox)
     unless {:msgbox => 1, :sorry => 1, :error => 1}.has_key?(type)
-      raise "Can't make that kind of message box"
+      raise ArgumentError, "Can't make that kind of message box"
     end
     cmdtype = "--#{type}"
     run([cmdtype, text])
+    true
   end
 
   # Present a window for showing the user a large amount of text, potentially using
