@@ -4,10 +4,59 @@ require_relative '../lib/dialog'
 require 'pry'
 
 Dialog.autosetup  # Figure out what implementation to use
-  
-#Dialog.dialogbox("Hello, world.")
-#dialogbox("You can cancel this", cancel: true)
-#dialogbox("This is a warning", warning: true)
+
+FoodChoices = Struct.new(:sandwich, :soup, :salad)
+
+class DialogTests
+  attr_reader :members
+  def initialize()
+    @tests = {dialogbox_return: "Dialog Box return value",
+              dialogbox_block: "Dialog Box block",
+              dialogbox_cancelable: "Dialog Box with cancel button",
+              dialogbox_warning: "Dialog Box in warning style",
+              dropdown_return: "Dropdown return value",
+
+              }
+    @members = @tests.keys
+  end
+
+  def text_of(sym)
+    @tests[sym]
+  end
+
+  def dialogbox_return
+    retval = Dialog.dialogbox("Hello, world.")
+    puts "Return value is: #{retval.inspect}"
+  end
+
+  def dialogbox_block
+    Dialog.dialogbox("Hello, world.") {|| puts "I concur!"}
+    puts "You should have seen 'I concur!' if you pressed 'ok'"
+  end
+
+  def dialogbox_cancelable
+    retval = Dialog.dialogbox("You can cancel this.", cancel: true)
+    puts "#{retval.inspect} - false if you pressed cancel."
+  end
+
+  def dialogbox_warning
+    retval = Dialog.dialogbox("This should be a warning box", warning: true)
+    puts "#{retval.inspect} - true if you pressed Yes, false otherwise."
+  end
+
+  def dropdown_return
+    fc = FoodChoices.new()
+    retval = Dialog.dropdown(fc)
+    puts "Choices object is: #{fc.inspect}"
+    puts "#{retval.inspect} - true if you chose something, false otherwise."
+  end
+end
+
+tests = DialogTests.new
+while Dialog.radiobuttons(tests, label: "Choose a test")
+  # Nothing in particular needed here.
+end
+
 #dialogbox("Are you quite sure?", warning: true, cancel: true, continue_btn: true, yesno: false)
 #Dialog.messagebox("Just so you know,")
 #messagebox("oops", type: :sorry)
