@@ -208,7 +208,7 @@ module Dialog::KDialog
   #    FoodSelection = Struct.new(:sandwich, :soup, :salad)
   #    fs = FoodSelection.new
   #    Dialog.checkboxes(fs, label: "What'll it be?")  # Suppose user chooses sandwich and salad...
-  #    puts fs.inspect  # => #<struct sandwich=true, soup=false, salad=false>
+  #    puts fs.inspect  # => #<struct sandwich=true, soup=false, salad=true>
   #
   # @example Using the checkboxes API, dispatching methods
   #    class FoodShop
@@ -238,7 +238,11 @@ module Dialog::KDialog
   #    end
   #
   #    fs = FoodShop.new(:normal)
-  #    Dialog.checkboxes(fs, label: "What'll it be?")
+  #    Dialog.checkboxes(fs, label: "What'll it be?") # Suppose user selects sandwich and soup...
+  #    # prints:
+  #      Making a sandwich
+  #      Making a bowl of Cheese
+  #
   #
   def checkboxes(choices, label: "")
     selection(choices, label: label, type: :check)
