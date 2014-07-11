@@ -48,6 +48,7 @@ module Dialog::KDialog
   # @param warning [Boolean] If true, the icon shown is a warning icon, not a standard question icon
   # @yield [] If the user makes a positive selection (yes or continue), the given
   #   block is called.  If not, the block is ignored.
+  # @return [Boolean] true, if the user selected yes or continue.  false, otherwise.
   def dialogbox(text, yesno: true, cancel: false, continue_btn: false, warning: false)
     valid_dialogs = {"warningyesnocancel" => true, "yesnocancel" => true,
                      "yesno" => true, "warningyesno" => true,
@@ -65,6 +66,7 @@ module Dialog::KDialog
     if block_given? and status == true
       yield()
     end
+    status
   end
 
   # Present a message box, for displaying a little text to the user.
@@ -148,6 +150,8 @@ module Dialog::KDialog
   #     * Optionally, a +#text_of+ method which takes a symbol and returns either nil or descriptive text to be shown to the user in place of that symbol
   # @!macro [new] selectionblock
   #  @yieldparam selection [Symbol] If a block is provided, it will be called with the selection, *instead of* the associated method on the choices object.
+  # @!macro [new] selectionreturn
+  #   @return [Boolean] true if user made a selection, false if user pressed cancel or closed the window
 
   # Present a dropdown box, calls the selected method on the choices object.
   #
@@ -157,8 +161,9 @@ module Dialog::KDialog
   # @macro choiceparam
   # @macro labelparam
   # @macro selectionblock
-  # @macro runreturn
+  # @macro selectionreturn
   def dropdown(choices, label: "Select one below")
+    retval = false
     cmd = ["--combobox", label]
   
     choices_to_text = Hash[choices.members.map {|m|
@@ -175,12 +180,11 @@ module Dialog::KDialog
     end
 
     cmd += choices.members.map {|k| choices_to_text[k] }
-
     run(cmd) {|sel|
       selected = text_to_choices[sel]
       writer = (selected.to_s + "=").to_sym
       if block_given?
-        yield(selected)
+        retval = yield(selected)
       elsif choices.respond_to?(writer)
         choices.send(writer, true)
         choices.members.each do |c|
@@ -188,10 +192,15 @@ module Dialog::KDialog
             choices.send((c.to_s + "=").to_sym, false)
           end
         end
+        retval = true
+      elsif selected.nil?
+        retval = false
       elsif choices.respond_to?(selected)
         choices.send(selected)
+        retval = true
       end
     }
+    retval
   end
 
   # Present a set of checkboxes to the user, calls the selected method on the choices object.
@@ -202,7 +211,7 @@ module Dialog::KDialog
   # @macro choiceparam
   # @macro labelparam
   # @macro selectionblock
-  # @macro runreturn
+  # @macro selectionreturn
   #
   # @example Using the checkboxes API, the simple Struct way...
   #    FoodSelection = Struct.new(:sandwich, :soup, :salad)
@@ -239,10 +248,9 @@ module Dialog::KDialog
   #
   #    fs = FoodShop.new(:normal)
   #    Dialog.checkboxes(fs, label: "What'll it be?") # Suppose user selects sandwich and soup...
-  #    # prints:
-  #      Making a sandwich
-  #      Making a bowl of Cheese
-  #
+  #    # This prints:
+  #    # Making a sandwich
+  #    # Making a bowl of Cheese
   #
   def checkboxes(choices, label: "")
     selection(choices, label: label, type: :check)
@@ -254,7 +262,7 @@ module Dialog::KDialog
   #
   # @macro choiceparam
   # @macro labelparam
-  # @macro runreturn
+  # @macro selectionreturn
   def radiobuttons(choices, label: "")
     selection(choices, label: label, type: :radio)
   end
@@ -266,9 +274,10 @@ module Dialog::KDialog
   # @param type [Symbol] Either :check (for checkboxes, multiple selections allowed) or :radio, (for
   #   radio buttons, only one selection)
   # @raise UnknownSelectionType If type is something other than :check or :radio
-  # @macro runreturn
+  # @macro selectionreturn
   # @api private
   def selection(choices, label: "", type: :check)
+    retval = false
     cmd = ["--separate-output"]
     cmd << case type
     when :check
@@ -299,6 +308,7 @@ module Dialog::KDialog
       end
     }
     run(cmd) do |sel|
+      retval = true
       offsets = sel.each_line.map{|l| l.chomp.to_i}
       selected = choices.members.values_at(*offsets)
       found_writer = false
@@ -322,6 +332,7 @@ module Dialog::KDialog
         end
       end
     end
+    retval
   end
 
   # Raise a notification for the user. This doesn't bring up a window that takes focus,
