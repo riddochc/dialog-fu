@@ -15,7 +15,8 @@ class DialogTests
               dialogbox_cancelable: "Dialog Box with cancel button",
               dialogbox_warning: "Dialog Box in warning style",
               dropdown_return: "Dropdown return value",
-
+              messagebox_normal: "Normal message box",
+              messagebox_badarg: "Message box with invalid argument",
               }
     @members = @tests.keys
   end
@@ -49,6 +50,19 @@ class DialogTests
     retval = Dialog.dropdown(fc)
     puts "Choices object is: #{fc.inspect}"
     puts "#{retval.inspect} - true if you chose something, false otherwise."
+  end
+
+  def messagebox_normal
+    retval = Dialog.messagebox("Kittens are cute.")
+    puts "#{retval.inspect} - should be true, unless something strange happened"
+  end
+
+  def messagebox_badarg
+    begin
+      retval = Dialog.messagebox("Kittens are cute.", type: :foo)
+    rescue ArgumentError
+      puts "Properly caught an argument error for using the wrong type."
+    end
   end
 end
 
