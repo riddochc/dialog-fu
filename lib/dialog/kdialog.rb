@@ -122,25 +122,18 @@ module Dialog::KDialog
   # @yieldparam input [String] the text provided by the user
   # @macro runreturn
   def inputbox(prompt: "Input some text", content: nil, height: 1, width: 40, password: false, &blk)
-    if height == 1
-      if password == true
-        cmd = ["--password"]
-      else
-        cmd = ["--inputbox"]
-      end
+    cmd = []
+    if password == true
+      cmd << "--password"
+    elsif height == 1
+      cmd += ["--inputbox", prompt, content.to_s]
     elsif height > 1
-      cmd = ["--textinputbox"]
+      cmd << "--textinputbox"
+      cmd << prompt
+      cmd << content.to_s
+      cmd += [width.to_s, height.to_s]
     end
-    cmd << prompt
-    if password == false
-      cmd << content if content
-      if height > 1
-        cmd += ["--height", height]
-      end
-      cmd += ["--width", 40]
-    end
-
-    run(cmd, &blk)
+    run(cmd, &blk) if cmd.length > 0
   end
 
   # @!macro [new] labelparam
