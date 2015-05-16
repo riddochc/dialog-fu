@@ -162,6 +162,8 @@ module Dialog::KDialog
   # Alternatively, sets boolean properties on a Struct-like choices object.
   # Similar to a radio button selection; only one selection can be made.
   #
+  # @see Dialog::Choices
+  #
   # @macro choiceparam
   # @macro labelparam
   # @macro selectionblock
@@ -169,7 +171,7 @@ module Dialog::KDialog
   def dropdown(choices, label: "Select one below")
     retval = false
     cmd = ["--combobox", label]
-  
+
     choices_to_text = Hash[choices.members.map {|m|
       if choices.respond_to?(:text_of)
         [m, choices.text_of(m)]
@@ -265,6 +267,7 @@ module Dialog::KDialog
   #    # You mean a :soup?
   #    # You mean a :salad?
   #
+  # @see Dialog::Choices
   def checkboxes(choices, label: "", &blk)
     selection(choices, label: label, type: :check, &blk)
   end
@@ -276,6 +279,8 @@ module Dialog::KDialog
   # @macro choiceparam
   # @macro labelparam
   # @macro selectionreturn
+  #
+  # @see Dialog::Choices
   def radiobuttons(choices, label: "", &blk)
     selection(choices, label: label, type: :radio, &blk)
   end

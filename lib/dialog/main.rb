@@ -50,4 +50,46 @@ module Dialog
       # The user will just have to load it themselves.
     end
   end
+
+  # If you want to use the dropdown, checkboxes, radiobuttons, or similar methods
+  # and don't want to create a class for callbacks... or can't, perhaps because
+  # the list of options isn't known at the time the code is written - dynamically
+  # created at runtime, perhaps.
+  #
+  # Or if you're just going for the quick hack, use this class to provide the
+  # selections to put in the lists, and then check the array returned by the
+  # +selected+ method to see what was picked.
+  class Choices
+    attr_reader :members, :selected
+    def initialize(*choices)
+      @members = []
+      @selected = []
+      @texts = {}
+      g = gensyms("choice_000") # If 3 digits isn't enough, you need a different interface anyway.
+      choices.zip(gensyms("choice_000")) {|text, sym|
+        @texts[sym] = text
+        @members << sym
+        define_singleton_method(sym) { ||
+          @selected << text_of(sym)
+        }
+      }
+    end
+
+    def text_of(s)
+      @texts[s].to_s
+    end
+
+    private
+    def gensyms(initial = nil)
+      Enumerator.new do |y|
+        sym = initial || 7.times.map { (65 + rand(26)).chr }.join
+        loop do
+          y.yield(sym.intern)
+          sym.succ!
+        end
+      end
+    end
+  end
+
+
 end

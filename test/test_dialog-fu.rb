@@ -20,6 +20,7 @@ class DialogTests
               messagebox_sorry: "Message box in 'sorry' style",
               messagebox_error: "Message box in 'error' style",
               checkboxes_yield: "Checkboxes with block",
+              checkboxes_choices: "Checkboxes with the Choices class",
               }
     @members = @tests.keys
   end
@@ -82,6 +83,13 @@ class DialogTests
       puts "You checked #{c}"
     }
     puts "You should've seen a 'You checked x' line for each thing you checked."
+  end
+
+  def checkboxes_choices
+    c = Dialog::Choices.new("soup", "salad", "sandwich")
+    Dialog.checkboxes(c, label: "Choose some food!")
+    puts "You checked:\n"
+    puts c.selected.join("\n")
   end
 end
 
