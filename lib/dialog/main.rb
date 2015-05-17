@@ -11,7 +11,7 @@ module Dialog
           io.read
         end
         to_run = ["kdialog", "yad", "zenity", "dialog"].map {|name|
-          name if ENV['PATH'].split(/:/).detect {|dir| File.exists?(File.join(dir, name)) }
+          name if ENV['PATH'].split(/:/).detect {|dir| File.exist?(File.join(dir, name)) }
         }.compact
 
         if kdepid != "" and to_run.include?("kdialog")
@@ -65,7 +65,7 @@ module Dialog
       @members = []
       @selected = []
       @texts = {}
-      g = gensyms("choice_000") # If 3 digits isn't enough, you need a different interface anyway.
+      # If 3 digits isn't enough, you need a different interface anyway.
       choices.zip(gensyms("choice_000")) {|text, sym|
         @texts[sym] = text
         @members << sym

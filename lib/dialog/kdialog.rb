@@ -324,7 +324,6 @@ module Dialog::KDialog
       selected = choices.members.values_at(*offsets)
       found_writer = false
       selected.each do |m|
-        method = m.to_sym
         writer = (m.to_s + '=').to_sym
         if block_given?
           yield(m)
