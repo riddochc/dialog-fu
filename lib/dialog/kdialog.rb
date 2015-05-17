@@ -580,6 +580,7 @@ module Dialog::KDialog
   # @macro runreturn
   def run(arglist, &blk)
     cmd = ["kdialog"] + arglist
+    puts cmd.inspect if $DEBUG
     output, code = Open3.capture2(*cmd)
     status = case code.exitstatus
              when 0 then true
