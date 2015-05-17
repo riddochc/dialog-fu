@@ -21,6 +21,8 @@ class DialogTests
               messagebox_error: "Message box in 'error' style",
               checkboxes_yield: "Checkboxes with block",
               checkboxes_choices: "Checkboxes with the Choices class",
+              inputtest: "Input box",
+              input_largetest: "Larger input box",
               }
     @members = @tests.keys
   end
@@ -90,6 +92,18 @@ class DialogTests
     Dialog.checkboxes(c, label: "Choose some food!")
     puts "You checked:\n"
     puts c.selected.join("\n")
+  end
+
+  def inputtest
+    input = Dialog.inputbox(prompt: "What did you have for lunch?")
+    puts "You entered:"
+    puts input
+  end
+
+  def input_largetest
+    input = Dialog.inputbox(prompt: "Write a couple lines:", height: 2)
+    puts "You entered:"
+    puts input
   end
 end
 
